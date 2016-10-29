@@ -1,0 +1,35 @@
+﻿@model IList<Fiap.Exemplo01.MVC.Web.Models.Produto>
+@{
+    ViewBag.Title = "Listar";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Lista de Produtos</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Valor</td>
+                        <td>@item.Quantidade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
