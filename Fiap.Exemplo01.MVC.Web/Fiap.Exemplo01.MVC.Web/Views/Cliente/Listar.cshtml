@@ -2,35 +2,43 @@
 @{
     ViewBag.Title = "Listar";
 }
-
-<div class="page-header">
-    <h2>Listar</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Listar</h2>
+        </div>
+    </div>
 </div>
 
-<table class="table">
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
 
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Crédito</th>
-            <th>Necessidades Especiais</th>
-            <th>Data Nascimento</th>
-        </tr>
-    </thead>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Crédito</th>
+                    <th>Necessidades Especiais</th>
+                    <th>Data Nascimento</th>
+                </tr>
+            </thead>
 
-    <tbody>
+            <tbody>
 
-        @foreach (var item in Model)
+                @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.Nome</td>
-                <td>@item.Idade</td>
-                <td>@item.Credito</td>
-                <td>@item.NecessidadesEspeciais</td>
-                <td>@item.DataNascimento</td>
-            </tr>
-        }
-    </tbody>
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Idade</td>
+                        <td>@item.Credito</td>
+                        <td>@item.NecessidadesEspeciais</td>
+                        <td>@item.DataNascimento</td>
+                    </tr>
+                }
+            </tbody>
 
-</table>
+        </table>
+    </div>
+</div>
+
