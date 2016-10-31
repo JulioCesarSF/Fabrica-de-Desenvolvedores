@@ -39,7 +39,11 @@ namespace Fiap.Exemplo01.MVC.Web.Models
 
         public Cliente()
         {
-
+            //inicialização da lista de SelectListItem
+            _estCivil.Add(new SelectListItem { Text = "Selecione", Value = "" });
+            _estCivil.Add(new SelectListItem { Text = "Solteiro", Value = "Solteiro" });
+            _estCivil.Add(new SelectListItem { Text = "Casado", Value = "Casado" });
+            _estCivil.Add(new SelectListItem { Text = "Outro", Value = "Outro" });
         }
 
         public Cliente(string nome, int idade, decimal credito, bool necessidadesEspeciais, string estadoCivil, DateTime dataNascimento)
@@ -49,13 +53,7 @@ namespace Fiap.Exemplo01.MVC.Web.Models
             Credito = credito;
             NecessidadesEspeciais = necessidadesEspeciais;
             EstadoCivil = estadoCivil;
-            DataNascimento = dataNascimento;
-
-            //inicialização da lista de SelectListItem
-            _estCivil.Add(new SelectListItem { Text = "Selecione", Value = "0" });
-            _estCivil.Add(new SelectListItem { Text = "Solteiro", Value = "1" });
-            _estCivil.Add(new SelectListItem { Text = "Casado", Value = "2" });
-            _estCivil.Add(new SelectListItem { Text = "Outro", Value = "3" });
+            DataNascimento = dataNascimento;            
         }
 
     }
