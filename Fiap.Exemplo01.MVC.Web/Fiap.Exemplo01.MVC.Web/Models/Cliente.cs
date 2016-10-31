@@ -35,12 +35,13 @@ namespace Fiap.Exemplo01.MVC.Web.Models
 
         }        
 
-        public Cliente(string nome, int idade, decimal credito, bool necessidadesEspeciais, DateTime dataNascimento)
+        public Cliente(string nome, int idade, decimal credito, bool necessidadesEspeciais, string estadoCivil, DateTime dataNascimento)
         {
             Nome = nome;
             Idade = idade;
             Credito = credito;
             NecessidadesEspeciais = necessidadesEspeciais;
+            EstadoCivil = estadoCivil;
             DataNascimento = dataNascimento;
         }
         
