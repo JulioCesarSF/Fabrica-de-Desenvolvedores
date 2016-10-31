@@ -28,6 +28,7 @@ namespace Fiap.Exemplo01.MVC.Web.Models
         [Display (Name = "Estado Civil")]
         public string EstadoCivil { get; set; }
         [Display (Name = "Data de Nascimento")]
+        [UIHint("Date")]
         public DateTime DataNascimento { get; set; }
 
         public Cliente()
