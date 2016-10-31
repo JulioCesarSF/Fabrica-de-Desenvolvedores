@@ -50,7 +50,7 @@
             <div class="form-group">
                 @Html.LabelFor(c => c.EstadoCivil)
 
-                @Html.DropDownListFor(c => c._estadoCivil, ViewBag.ListaEstadoCivil as SelectList)
+                @Html.DropDownListFor(c => c._estadoCivil, ViewBag.ListaEstadoCivil as SelectList, new { @class="form-control"})
 
                 @*@Html.TextBoxFor(c => c.EstadoCivil, new { placeholder="Digite seu Estado Civil", @class="form-control" })*@
             </div>
