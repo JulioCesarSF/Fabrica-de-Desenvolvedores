@@ -17,7 +17,8 @@ namespace Fiap.Exemplo01.MVC.Web.Controllers
         {
             Cliente c = new Cliente();
             //SelectList
-            ViewBag.ListaEstadoCivil = new SelectList(c._estadoCivil, c._estadoCivil);
+            //nova Lista de SelectListItem passado como ViewBag
+            ViewBag.ListaEstadoCivil = c._estCivil;
             return View();
         }
 
