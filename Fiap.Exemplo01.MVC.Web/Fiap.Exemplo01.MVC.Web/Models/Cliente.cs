@@ -21,7 +21,7 @@ namespace Fiap.Exemplo01.MVC.Web.Models
 
         //Nova lista de SelectListItem conforme doc da MS: 
         //https://www.asp.net/mvc/overview/older-versions/working-with-the-dropdownlist-box-and-jquery/using-the-dropdownlist-helper-with-aspnet-mvc
-        public IList<SelectListItem> _estCivil = new List<SelectListItem>();
+        public static IList<SelectListItem> _estCivil = new List<SelectListItem>();
 
         [Display(Name = "Nome")]
         public string Nome { get; set; }

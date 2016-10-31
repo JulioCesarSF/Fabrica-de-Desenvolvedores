@@ -15,16 +15,15 @@ namespace Fiap.Exemplo01.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Cadastrar()
         {
-            Cliente c = new Cliente();
             //SelectList
             //nova Lista de SelectListItem passado como ViewBag
-            ViewBag.ListaEstadoCivil = c._estCivil;
+            ViewBag.ListaEstadoCivil = Cliente._estCivil;
             return View();
         }
 
         [HttpPost]
         public ActionResult Cadastrar(Cliente cliente)
-        {
+        {            
             _lista.Add(cliente);
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Cadastro realizado com sucesso!";
