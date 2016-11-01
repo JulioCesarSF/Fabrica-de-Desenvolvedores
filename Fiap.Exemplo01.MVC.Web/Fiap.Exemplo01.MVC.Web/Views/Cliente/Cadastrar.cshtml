@@ -42,6 +42,8 @@
             <div class="form-group">
                 @Html.LabelFor(c => c.EstadoCivil)
                 @Html.DropDownListFor(c => c.EstadoCivil, ViewBag.estados as SelectList, "Selecione", new { @class = "form-control" })
+
+                @*@Html.DropDownListFor(c => c.EstadoCivil, null, new { @class = "form-control" })*@
                 @*@Html.DropDownListFor(c => c.EstadoCivil, null, new { @class = "form-control" })*@
                 @*@Html.TextBoxFor(c => c.EstadoCivil, new { placeholder="Digite seu Estado Civil", @class="form-control" })*@
             </div>

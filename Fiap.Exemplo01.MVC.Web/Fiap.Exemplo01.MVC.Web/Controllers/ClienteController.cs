@@ -23,6 +23,8 @@ namespace Fiap.Exemplo01.MVC.Web.Controllers
             lista.Add("Separado");
 
             ViewBag.estados = new SelectList(lista);
+
+            //ViewBag.EstadoCivil = new SelectList(new[] { "Solteiro", "Casado", "Outro" });
             return View();
         }
 
