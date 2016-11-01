@@ -1,0 +1,30 @@
+﻿@helper HelperName(string name) {
+    // your helper can contain code and/or markup, e.g.
+    // var msg = "Hello " + name;
+    // <p>@msg</p>
+    // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
+}
+
+@helper Titulo(string titulo) {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>@titulo</h2>
+            </div>
+        </div>
+    </div>
+}
+
+@helper Submit(string valor)
+{
+    <div class="from-group">
+        <input type="submit" value="@valor" class="btn btn-primary" />
+    </div>
+}
+
+@helper SubmitExcluir(string valor)
+{
+    <div class="from-group">
+        <input type="submit" value="@valor" class="btn btn-danger" />
+    </div>
+}

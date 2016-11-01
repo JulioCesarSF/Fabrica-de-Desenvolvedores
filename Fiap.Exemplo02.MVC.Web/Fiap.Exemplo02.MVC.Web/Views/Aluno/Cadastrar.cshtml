@@ -1,0 +1,24 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Aluno
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+@Juliao.Titulo("Cadastrar")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="@TempData["tipoMensagem"]">
+            <p>@TempData["mensagem"]</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        { 
+            @Html.EditorForModel(new { @class="form-control"})
+            @Juliao.Submit("Salvar")
+        }
+    </div>
+</div>
