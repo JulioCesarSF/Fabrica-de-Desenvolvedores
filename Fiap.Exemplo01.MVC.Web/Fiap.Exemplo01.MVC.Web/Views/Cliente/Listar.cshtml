@@ -21,6 +21,7 @@
                     <th>Crédito</th>
                     <th>Necessidades Especiais</th>
                     <th>Data Nascimento</th>
+                    <th>Estado Civil</th>
                 </tr>
             </thead>
 
@@ -33,7 +34,8 @@
                         <td>@item.Idade</td>
                         <td>@item.Credito</td>
                         <td>@item.NecessidadesEspeciais</td>
-                        <td>@item.DataNascimento</td>
+                        <td>@item.DataNascimento.ToShortDateString()</td>
+                        <td>@item.EstadoCivil</td>
                     </tr>
                 }
             </tbody>

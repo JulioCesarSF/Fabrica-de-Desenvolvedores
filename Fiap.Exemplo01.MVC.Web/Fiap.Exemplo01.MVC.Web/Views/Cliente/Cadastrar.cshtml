@@ -34,26 +34,31 @@
 
             <div class="form-group">
                 @Html.LabelFor(c => c.Idade)
-                @Html.TextBoxFor(c => c.Idade, new { placeholder="Digite sua idade", @class = "form-control" })
+                @Html.TextBoxFor(c => c.Idade, new { placeholder = "Digite sua idade", @class = "form-control" })
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(c => c.Credito)
-                @Html.TextBoxFor(c => c.Credito, new { placeholder="Digite seu crédito", @class = "form-control" })
+                @Html.TextBoxFor(c => c.Credito, new { placeholder = "Digite seu crédito", @class = "form-control" })
             </div>
 
             <div class="form-group">
                 @Html.CheckBoxFor(c => c.NecessidadesEspeciais)
                 @Html.LabelFor(c => c.NecessidadesEspeciais)
-            </div>      
-        //TODO melhorar o SelectList
-            <div class="form-group">
-                @Html.LabelFor(c => c.EstadoCivil)
-
-                @Html.DropDownListFor(c => c._estadoCivil, ViewBag.ListaEstadoCivil as SelectList)
-
-                @*@Html.TextBoxFor(c => c.EstadoCivil, new { placeholder="Digite seu Estado Civil", @class="form-control" })*@
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.DataNascimento)
+                @Html.EditorFor(c => c.DataNascimento, new { @class = "form-control" })
+            </div>
+        //TODO melhorar o SelectList
+        <div class="form-group">
+            @Html.LabelFor(c => c.EstadoCivil)
+            @Html.DropDownListFor(c=>c.EstadoCivil, ViewBag.estados as SelectList, new { @class="form-control" })
+
+            @*@Html.DropDownListFor(c => c.EstadoCivil, null, new { @class = "form-control" })*@
+            @*@Html.TextBoxFor(c => c.EstadoCivil, new { placeholder="Digite seu Estado Civil", @class="form-control" })*@
+        </div>
 
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
