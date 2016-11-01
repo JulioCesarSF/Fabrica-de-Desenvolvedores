@@ -51,17 +51,14 @@
                 @Html.LabelFor(c => c.DataNascimento)
                 @Html.EditorFor(c => c.DataNascimento, new { @class = "form-control" })
             </div>
-            //TODO melhorar o SelectList
-            <div class="form-group">
-                @Html.LabelFor(c => c.EstadoCivil)
+        //TODO melhorar o SelectList
+        <div class="form-group">
+            @Html.LabelFor(c => c.EstadoCivil)
 
-                @Html.DropDownList("ListaEstadoCivil")
+            @Html.DropDownListFor(c => c.EstadoCivil, null, new { @class = "form-control" })
 
-                @*antiga lista*@
-                @*@Html.DropDownListFor(c => c._estadoCivil, ViewBag.ListaEstadoCivil as SelectList, new { @class = "form-control" })*@
-
-                @*@Html.TextBoxFor(c => c.EstadoCivil, new { placeholder="Digite seu Estado Civil", @class="form-control" })*@
-            </div>
+            @*@Html.TextBoxFor(c => c.EstadoCivil, new { placeholder="Digite seu Estado Civil", @class="form-control" })*@
+        </div>
 
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />

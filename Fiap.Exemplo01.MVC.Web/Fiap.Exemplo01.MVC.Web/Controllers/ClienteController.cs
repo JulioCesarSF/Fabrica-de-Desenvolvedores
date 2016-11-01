@@ -15,9 +15,8 @@ namespace Fiap.Exemplo01.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Cadastrar()
         {
-            //SelectList
-            //nova Lista de SelectListItem passado como ViewBag
-            ViewBag.ListaEstadoCivil = Cliente._estCivil;
+            //SelectList            
+            ViewBag.EstadoCivil = new SelectList(new[] { "Solteiro", "Casado", "Outro" });
             return View();
         }
 

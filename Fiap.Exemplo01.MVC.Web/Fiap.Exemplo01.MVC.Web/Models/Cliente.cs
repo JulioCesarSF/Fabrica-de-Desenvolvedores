@@ -10,18 +10,16 @@ namespace Fiap.Exemplo01.MVC.Web.Models
 {
     public class Cliente
     {
-        //lista de EstadoCivil com inicialização https://msdn.microsoft.com/en-us/library/bb384062.aspx        
-        //public IList<string> _estadoCivil = new List<string>()
-        //{
-        //   "Selecione",
-        //   "Solteiro",
-        //   "Casado",
-        //   "Outro"
-        //};
+        ////lista de EstadoCivil com inicialização https://msdn.microsoft.com/en-us/library/bb384062.aspx        
+        //public IList<SelectListItem> _estadoCivil = new List<SelectListItem>();               
 
-        //Nova lista de SelectListItem conforme doc da MS: 
-        //https://www.asp.net/mvc/overview/older-versions/working-with-the-dropdownlist-box-and-jquery/using-the-dropdownlist-helper-with-aspnet-mvc
-        public static IList<SelectListItem> _estCivil = new List<SelectListItem>();
+        //public IList<SelectListItem> getLista()
+        //{
+        //    _estadoCivil.Add(new SelectListItem() { Text = "Solteiro", Value = "Solteiro" });
+        //    _estadoCivil.Add(new SelectListItem() { Text = "Casado", Value = "Casado" });
+        //    _estadoCivil.Add(new SelectListItem() { Text = "Outro", Value = "Outro" });
+        //    return _estadoCivil;
+        //}
 
         [Display(Name = "Nome")]
         public string Nome { get; set; }
@@ -39,11 +37,11 @@ namespace Fiap.Exemplo01.MVC.Web.Models
 
         public Cliente()
         {
-            //inicialização da lista de SelectListItem
-            _estCivil.Add(new SelectListItem { Text = "Selecione", Value = "" });
-            _estCivil.Add(new SelectListItem { Text = "Solteiro", Value = "Solteiro" });
-            _estCivil.Add(new SelectListItem { Text = "Casado", Value = "Casado" });
-            _estCivil.Add(new SelectListItem { Text = "Outro", Value = "Outro" });
+            ////inicialização da lista de SelectListItem
+            //_estCivil.Add(new SelectListItem { Text = "Selecione", Value = "" });
+            //_estCivil.Add(new SelectListItem { Text = "Solteiro", Value = "Solteiro" });
+            //_estCivil.Add(new SelectListItem { Text = "Casado", Value = "Casado" });
+            //_estCivil.Add(new SelectListItem { Text = "Outro", Value = "Outro" });
         }
 
         public Cliente(string nome, int idade, decimal credito, bool necessidadesEspeciais, string estadoCivil, DateTime dataNascimento)
