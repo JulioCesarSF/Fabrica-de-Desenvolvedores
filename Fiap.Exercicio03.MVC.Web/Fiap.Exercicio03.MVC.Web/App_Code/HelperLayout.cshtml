@@ -1,0 +1,19 @@
+﻿@helper Titulo(string titulo) { 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h2>@titulo</h2>
+            </div>
+        </div>
+    </div>
+}
+
+@helper Mensagem(string mensagem, string tipoMensagem) { 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="@tipoMensagem">
+                <p>@mensagem</p>
+            </div>
+        </div>
+    </div>    
+}
