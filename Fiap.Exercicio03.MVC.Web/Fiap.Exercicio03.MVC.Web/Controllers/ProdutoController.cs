@@ -10,8 +10,13 @@ namespace Fiap.Exercicio03.MVC.Web.Controllers
     public class ProdutoController : Controller
     {
         private ProdutoContext pContext = new ProdutoContext();
-        // GET: Produto
-        public ActionResult Index()
+
+        /// <summary>
+        /// Action/Método para mostrar a View de cadastro de produto
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Cadastrar()
         {
             return View();
         }
