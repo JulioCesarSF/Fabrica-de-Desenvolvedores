@@ -11,14 +11,22 @@ namespace Fiap.Exercicio03.MVC.Web.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Produto
     {
+        [Display(Name = "Produto ID")]
         public int ProdutoId { get; set; }
+        [Display (Name = "Data de Nascimento")]
+        [UIHint("Date")]
         public System.DateTime DataCadastro { get; set; }
+        [Display (Name = "Descrição")]
         public string Descricao { get; set; }
+        [Display(Name = "Nacional")]
         public bool Nacional { get; set; }
+        [Display(Name = "Titulo")]
         public string Titulo { get; set; }
+        [Display(Name = "Valor")]
         public decimal Valor { get; set; }
     }
 }
