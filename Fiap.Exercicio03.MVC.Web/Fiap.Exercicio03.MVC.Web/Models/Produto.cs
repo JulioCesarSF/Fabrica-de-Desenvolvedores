@@ -19,12 +19,17 @@ namespace Fiap.Exercicio03.MVC.Web.Models
         public int ProdutoId { get; set; }
         [Display (Name = "Data de Nascimento")]
         [UIHint("Date")]
+        [Required(ErrorMessage ="Preencha corretamente!")]
         public System.DateTime DataCadastro { get; set; }
         [Display (Name = "Descrição")]
+        [StringLength(200, MinimumLength = 3)]
+        [Required(ErrorMessage = "Máximo de 200 caracters e mínimo de 3.")]
         public string Descricao { get; set; }
         [Display(Name = "Nacional")]
         public bool Nacional { get; set; }
         [Display(Name = "Titulo")]
+        [StringLength(150, MinimumLength = 3)]
+        [Required(ErrorMessage = "Máximo de 150 caracters e mínimo de 3.")]
         public string Titulo { get; set; }
         [Display(Name = "Valor")]
         public decimal Valor { get; set; }
