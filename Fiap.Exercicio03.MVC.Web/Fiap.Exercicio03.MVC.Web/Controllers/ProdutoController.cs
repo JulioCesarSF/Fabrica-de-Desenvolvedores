@@ -20,5 +20,15 @@ namespace Fiap.Exercicio03.MVC.Web.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Cadastrar(Produto produto)
+        {
+            pContext.Produto.Add(produto);
+            pContext.SaveChanges();
+            TempData["tipoMensagem"] = "alert alert-success";
+            TempData["mensagem"] = "Produto cadastrado!";
+            return RedirectToAction("Cadastrar");
+        }
     }
 }
