@@ -1,9 +1,47 @@
-﻿
+﻿@model List<Fiap.Exercicio03.MVC.Web.Models.Produto>
 @{
     ViewBag.Title = "Listar";
 }
 
 @HelperLayout.Titulo("Listar")
 
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
 
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Data de Cadastrar</th>
+                    <th>Valor</th>
+                    <th>Nacional</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Titulo</td>
+                        <td>@item.Descricao</td>
+                        <td>@item.DataCadastro</td>
+                        <td>@item.Valor</td>
+                        <td>                           
+                            @{ 
+                                if (@item.Nacional)
+                                {
+                                    @:Sim
+                                }
+                                else
+                                {
+                                    @:Não
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
