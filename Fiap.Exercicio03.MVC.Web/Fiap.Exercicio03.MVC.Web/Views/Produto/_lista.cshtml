@@ -1,0 +1,21 @@
+﻿@model Fiap.Exercicio03.MVC.Web.Models.Produto
+
+<tr>
+    <td>@Model.Titulo</td>
+    <td>@Model.Descricao</td>
+    <td>@Model.DataCadastro</td>
+    <td>@Model.Valor</td>
+    <td>
+        @{
+            if (@Model.Nacional)
+            {
+                @:Sim
+            }
+            else
+            {
+                @:Não
+            }
+        }
+    </td>
+</tr>
+

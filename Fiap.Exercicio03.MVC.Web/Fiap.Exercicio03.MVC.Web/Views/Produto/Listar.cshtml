@@ -21,24 +21,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@item.Titulo</td>
-                        <td>@item.Descricao</td>
-                        <td>@item.DataCadastro</td>
-                        <td>@item.Valor</td>
-                        <td>                           
-                            @{ 
-                                if (@item.Nacional)
-                                {
-                                    @:Sim
-                                }
-                                else
-                                {
-                                    @:Não
-                                }
-                            }
-                        </td>
-                    </tr>
+                    @Html.Partial("_lista", item)                   
                 }
             </tbody>
         </table>
