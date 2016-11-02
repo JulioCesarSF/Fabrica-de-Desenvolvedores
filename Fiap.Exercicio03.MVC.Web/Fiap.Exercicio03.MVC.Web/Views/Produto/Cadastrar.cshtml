@@ -1,4 +1,4 @@
-﻿
+﻿@model Fiap.Exercicio03.MVC.Web.Models.Produto
 @{
     ViewBag.Title = "Cadastrar";
 }
@@ -10,7 +10,30 @@
         
         @using (Html.BeginForm())
         {
-
+            <div class="form-group">
+                @Html.LabelFor(p => p.Titulo)
+                @Html.TextBoxFor(p => p.Titulo)
+            </div>
+                       
+            <div class="form-group">
+                @Html.LabelFor(p=>p.Valor)
+                @Html.TextBoxFor(p=>p.Valor)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(p=>p.DataCadastro)
+                @Html.TextBoxFor(p=>p.DataCadastro)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(p=>p.Descricao)
+                @Html.TextBoxFor(p=>p.Descricao)
+            </div>
+            <div class="form-group">
+                @Html.CheckBoxFor(p=>p.Nacional)
+                @Html.LabelFor(p=>p.Nacional)
+            </div>
+            <div class="form-group">
+                @HelperForm.BotaoSubmit("Salvar", "btn btn-primary")
+            </div>
         }
 
     </div>
