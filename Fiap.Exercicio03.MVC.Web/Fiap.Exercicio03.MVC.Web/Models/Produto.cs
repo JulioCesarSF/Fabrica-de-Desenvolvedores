@@ -17,7 +17,7 @@ namespace Fiap.Exercicio03.MVC.Web.Models
     {
         [Display(Name = "Produto ID")]
         public int ProdutoId { get; set; }
-        [Display (Name = "Data de Nascimento")]
+        [Display (Name = "Data de Cadastro")]
         [UIHint("Date")]
         [Required(ErrorMessage ="Preencha corretamente!")]
         public System.DateTime DataCadastro { get; set; }
