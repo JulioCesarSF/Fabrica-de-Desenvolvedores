@@ -58,4 +58,10 @@
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Produto.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Fiap.Exercicio03.Database.refactorlog" />
+  </ItemGroup>
 </Project>
