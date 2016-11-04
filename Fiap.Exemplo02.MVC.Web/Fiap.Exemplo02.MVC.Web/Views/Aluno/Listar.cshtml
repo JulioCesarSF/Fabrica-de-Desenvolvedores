@@ -31,10 +31,11 @@
                             @using (Html.BeginForm("Excluir", "Aluno"))
                             {
                                 @Html.Hidden("Id", @item.Id)
-                                @Juliao.SubmitExcluir("Excluir")
+                                @Juliao.SubmitSemDiv("Excluir", "btn btn-danger")
+                                @Html.ActionLink("Alterar", "Alterar", "Aluno", new { @class = "btn btn-primary sm" })
                             }
                             
-                            @Html.ActionLink("Alterar", "Alterar", "Aluno", new { @class = "btn btn-primary sm" })
+                           
                         </td>
                     </tr>
                 }

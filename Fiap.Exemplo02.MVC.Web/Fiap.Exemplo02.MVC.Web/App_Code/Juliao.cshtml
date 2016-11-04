@@ -22,9 +22,22 @@
     </div>
 }
 
+@helper SubmitSemDiv(string valor, string classe) {
+    <input type="submit" value="@valor" class="@classe" />
+}
+
 @helper SubmitExcluir(string valor)
 {
     <div class="from-group">
         <input type="submit" value="@valor" class="btn btn-danger" />
     </div>
+}
+
+@helper BotaoLink(string link, string valor, string tipo)
+{
+    <a href="@link" class="@tipo">@valor</a>
+}
+
+@helper Botao(string valor, string tipo) { 
+    <button value="@valor" class="@tipo"></button>
 }

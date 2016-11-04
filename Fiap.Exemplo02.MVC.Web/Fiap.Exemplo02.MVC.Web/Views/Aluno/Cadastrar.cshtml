@@ -17,8 +17,31 @@
     <div class="col-md-12">
         @using (Html.BeginForm())
         { 
-            @Html.EditorForModel(new { @class="form-control"})
+
+            <div class="form-group">
+                @Html.LabelFor(a=>a.Nome)
+                @Html.TextBoxFor(a=>a.Nome, new { @class="form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a=>a.DataNascimento)
+                @Html.TextBoxFor(a => a.DataNascimento, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a => a.Desconto)
+                @Html.TextBoxFor(a=>a.Desconto, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a=>a.Bolsa)
+                @Html.CheckBoxFor(a=>a.Bolsa)
+            </div>
+
             @Juliao.Submit("Salvar")
+
+            @*@Html.EditorForModel(new { @class="form-control"})
+            @Juliao.Submit("Salvar")*@
         }
     </div>
 </div>
