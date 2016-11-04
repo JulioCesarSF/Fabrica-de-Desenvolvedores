@@ -40,7 +40,9 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var context = new PortalContext();
             Aluno a = context.Aluno.Find(int.Parse(id));
             context.Aluno.Remove(a);
-            context.SaveChanges();           
+            context.SaveChanges();
+            TempData["tipoMensagem"] = "alert alert-success";
+            TempData["mensagem"] = "Aluno formatado";
             return RedirectToAction("Listar");
         }
 
