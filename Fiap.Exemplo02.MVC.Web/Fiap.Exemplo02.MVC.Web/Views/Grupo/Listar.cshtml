@@ -42,8 +42,8 @@
                         </td>
                         
                         <td>
-                            <a href="#" class="btn btn-danger btn-sm">Excluir</a>
-                            <a href="#" class="btn btn-primary btn-sm">Alterar</a>
+                            <a href="#" class="btn btn-danger btn-sm">Excluir</a>                           
+                            @Html.ActionLink("Alterar", "Alterar", new { id = @item.Id }, new { @class="btn btn-primary btn-sm" })
                         </td>
                        
                     </tr>
