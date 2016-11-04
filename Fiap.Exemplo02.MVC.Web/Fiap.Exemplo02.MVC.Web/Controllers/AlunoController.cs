@@ -35,10 +35,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Excluir(int id)
+        public ActionResult Excluir(string id)
         {
             var context = new PortalContext();
-            Aluno a = context.Aluno.Find(id);
+            Aluno a = context.Aluno.Find(int.Parse(id));
             context.Aluno.Remove(a);
             context.SaveChanges();           
             return RedirectToAction("Listar");
