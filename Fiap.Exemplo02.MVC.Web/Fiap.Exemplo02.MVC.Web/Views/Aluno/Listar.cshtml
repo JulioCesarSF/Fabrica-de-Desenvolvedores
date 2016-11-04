@@ -7,6 +7,14 @@
 
 <div class="row">
     <div class="col-md-12">
+        <div class="@TempData["tipoMensagem"]">
+            <p>@TempData["mensagem"]</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <table class="table">
             <thead>
                 <tr>
@@ -27,15 +35,15 @@
                         <td>@item.DataNascimento.ToShortDateString()</td>
                         <td>@item.Desconto</td>
                         <td>@item.Bolsa</td>
-                        <td>
+                        <td> 
+                            
                             @using (Html.BeginForm("Excluir", "Aluno"))
                             {
-                                @Html.Hidden("Id", @item.Id)
-                                @Juliao.SubmitSemDiv("Excluir", "btn btn-danger")
-                                @Html.ActionLink("Alterar", "Alterar", "Aluno", new { @class = "btn btn-primary sm" })
+                                @Html.Hidden("id", @item.Id)
+                                @Html.ActionLink("Editar", "Editar", new { id = @item.Id }, new { @class = "btn btn-primary btn-sm" })
+                                @Juliao.SubmitSemDiv("Excluir", "btn btn-danger btn-sm")
                             }
-                            
-                           
+
                         </td>
                     </tr>
                 }

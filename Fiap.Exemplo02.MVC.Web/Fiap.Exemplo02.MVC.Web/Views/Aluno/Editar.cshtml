@@ -1,0 +1,45 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Aluno
+@{
+    ViewBag.Title = "Editar";
+}
+
+@Juliao.Titulo("Editar Aluno")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="@TempData["tipoMensagem"]">
+            <p>@TempData["mensagem"]</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(a => a.Nome)
+                @Html.TextBoxFor(a => a.Nome, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a => a.DataNascimento)
+                @Html.TextBoxFor(a => a.DataNascimento, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a => a.Desconto)
+                @Html.TextBoxFor(a => a.Desconto, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a => a.Bolsa)
+                @Html.CheckBoxFor(a => a.Bolsa)
+            </div>
+
+            @Juliao.Submit("Salvar")
+           
+        }
+    </div>
+</div>
+
