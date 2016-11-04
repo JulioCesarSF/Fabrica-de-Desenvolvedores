@@ -35,15 +35,45 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Excluir()
+        public ActionResult Excluir(int id)
         {
             var context = new PortalContext();
-            Aluno a = context.Aluno.Find("Id");
+            Aluno a = context.Aluno.Find(id);
             context.Aluno.Remove(a);
-            context.SaveChanges();
-           // IList<Aluno> _lista = new PortalContext().Aluno.ToList();
+            context.SaveChanges();           
             return RedirectToAction("Listar");
         }
-               
+
+        [HttpGet]
+        //(int id) para receber o id do view
+        public ActionResult Editar(int id)
+        {
+            //buscar o objeto (aluno) no banco
+            var context = new PortalContext();
+            var aluno = context.Aluno.Find(id);
+            //manda o aluno para a view
+            return View(aluno);
+        }
+        
+        [HttpPost]
+        public ActionResult Editar(Aluno aluno)
+        {
+            /*
+            context.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+            */
+
+            var context = new PortalContext();
+            var a = context.Aluno.Find(aluno.Id);
+            a.Nome = aluno.Nome;
+            a.DataNascimento = aluno.DataNascimento;
+            a.Bolsa = aluno.Bolsa;
+            a.Desconto = aluno.Desconto;
+            context.SaveChanges();
+
+            TempData["tipoMensagem"] = "alert alert-success";
+            TempData["mensagem"] = "Aluno atualizado";
+            return RedirectToAction("Listar");
+        }             
     }
 }
