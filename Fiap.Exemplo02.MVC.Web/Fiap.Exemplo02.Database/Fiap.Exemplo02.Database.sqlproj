@@ -60,5 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Aluno.sql" />
+    <Build Include="Grupo.sql" />
+    <Build Include="Projeto.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Fiap.Exemplo02.Database.refactorlog" />
   </ItemGroup>
 </Project>
