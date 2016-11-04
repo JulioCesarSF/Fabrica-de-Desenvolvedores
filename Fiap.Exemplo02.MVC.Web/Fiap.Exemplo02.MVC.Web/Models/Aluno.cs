@@ -11,13 +11,18 @@ namespace Fiap.Exemplo02.MVC.Web.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Aluno
     {
         public int Id { get; set; }
+        [Display (Name ="Nome")]
         public string Nome { get; set; }
+        [Display(Name = "Data de Nascimento")]
         public System.DateTime DataNascimento { get; set; }
+        [Display(Name = "Bolsa")]
         public bool Bolsa { get; set; }
+        [Display(Name = "Desconto")]
         public Nullable<double> Desconto { get; set; }
     }
 }
