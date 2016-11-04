@@ -76,6 +76,14 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno atualizado";
             return RedirectToAction("Listar");
-        }             
+        } 
+        
+        [HttpGet]
+        public ActionResult Buscar(String nomeBusca)
+        {
+            var context = new PortalContext();
+            var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
+            return View("Listar", a);
+        }            
     }
 }
