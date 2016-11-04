@@ -1,0 +1,54 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Grupo
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+@Juliao.Titulo("Cadastrar Grupo/Projeto")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="@TempData["tipoMensagem"]">
+            <p>@TempData["mensagem"]</p>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+<div class="row">
+    <div class="col-md-6">       
+        <div class="page-header"><h4>Grupo</h4></div>
+        <div class="form-group">
+            @Html.LabelFor(g => g.Nome)
+            @Html.TextBoxFor(g => g.Nome, new { @class = "form-control" })
+        </div>       
+     </div>
+    <div class="col-md-6">
+        <div class="page-header"><h4>Projeto</h4></div>
+        <div class="form-group">
+            @Html.LabelFor(g => g.Projeto.Nome)
+            @Html.TextBoxFor(g => g.Projeto.Nome, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(g => g.Projeto.Descricao)
+            @Html.TextBoxFor(g => g.Projeto.Descricao, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(g => g.Projeto.DataInicio)
+            @Html.TextBoxFor(g => g.Projeto.DataInicio, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(g => g.Projeto.DataTermino)
+            @Html.TextBoxFor(g => g.Projeto.DataTermino, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(g => g.Projeto.Entregue)
+            @Html.CheckBoxFor(g => g.Projeto.Entregue)
+        </div>
+        <div class="form-group">
+            @Juliao.Submit("Salvar")
+        </div>
+        
+    </div>
+</div>
+}
+

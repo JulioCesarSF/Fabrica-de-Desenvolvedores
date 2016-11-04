@@ -1,0 +1,59 @@
+﻿@model List<Fiap.Exemplo02.MVC.Web.Models.Grupo>
+@{
+    ViewBag.Title = "Listar";
+}
+
+@Juliao.Titulo("Lista de Grupo")
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Grupo</th>
+                    <th>Projeto</th>
+                    <th>Data Inicio</th>
+                    <th>Data Término</th>
+                    <th>Entregue</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Projeto.Nome</td>
+                        <td>@item.Projeto.DataInicio.ToShortDateString()</td>
+                        <td>@item.Projeto.DataTermino</td>
+                        <td>
+                            @{
+                                if (@item.Projeto.Entregue)
+                                {
+                                    @:Sim
+                                }
+                                else
+                                {
+                                    @:Não
+                                }
+                            }
+                        </td>
+                        
+                        <td>
+                            <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+                            <a href="#" class="btn btn-primary btn-sm">Alterar</a>
+                        </td>
+                       
+                    </tr>
+
+                }
+                
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
