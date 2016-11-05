@@ -47,7 +47,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Alterar(Grupo grupo)
         {
             var con = new PortalContext();
-
             var projeto = con.Projeto.Find(grupo.Id);
             var g = con.Grupo.Find(grupo.Id);
             projeto.Nome = grupo.Projeto.Nome;
