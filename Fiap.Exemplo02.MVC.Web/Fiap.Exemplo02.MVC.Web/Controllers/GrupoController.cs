@@ -54,12 +54,11 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             projeto.DataInicio = grupo.Projeto.DataInicio;
             projeto.DataTermino = grupo.Projeto.DataTermino;
             projeto.Entregue = grupo.Projeto.Entregue;
-
             g.Nome = grupo.Nome;
             g.Nota = grupo.Nota;   
             con.SaveChanges();
             TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Aluno atualizado";
+            TempData["mensagem"] = "Grupo/Projeto atualizado!";
             return RedirectToAction("Listar");
         }
     }
