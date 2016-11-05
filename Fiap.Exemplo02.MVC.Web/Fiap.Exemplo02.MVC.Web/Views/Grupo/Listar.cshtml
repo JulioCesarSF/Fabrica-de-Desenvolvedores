@@ -42,7 +42,9 @@
                         </td>
                         
                         <td>
-                            <a href="#" class="btn btn-danger btn-sm">Excluir</a>                           
+                            <button onclick="IDID.value=@item.Id" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                                Excluir
+                            </button>                       
                             @Html.ActionLink("Alterar", "Alterar", new { id = @item.Id }, new { @class="btn btn-primary btn-sm" })
                         </td>                       
 
