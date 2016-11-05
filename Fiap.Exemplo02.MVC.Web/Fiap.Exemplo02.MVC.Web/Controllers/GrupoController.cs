@@ -61,5 +61,19 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["mensagem"] = "Grupo/Projeto atualizado!";
             return RedirectToAction("Listar");
         }
+
+        [HttpPost]
+        public ActionResult Excluir(int id)
+        {
+            var con = new PortalContext();
+            var projeto = con.Projeto.Find(id);
+            con.Projeto.Remove(projeto);
+            var gg = con.Grupo.Find(id);
+            con.Grupo.Remove(gg);
+            con.SaveChanges();
+            TempData["tipoMensagem"] = "alert alert-success";
+            TempData["mensagem"] = "Grupo/Projeto removido com sucesso!";
+            return RedirectToAction("Listar");
+        }
     }
 }
