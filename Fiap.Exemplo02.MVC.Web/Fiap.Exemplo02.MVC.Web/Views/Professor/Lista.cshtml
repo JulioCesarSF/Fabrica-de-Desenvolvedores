@@ -1,0 +1,40 @@
+﻿@model List<Fiap.Exemplo02.MVC.Web.Models.Professor>
+@{
+    ViewBag.Title = "Lista";
+}
+
+@Juliao.Titulo("Lista de Professor")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="@TempData["tipoMensagem"]">
+            <p>@TempData["mensagem"]</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Salário</th>
+                </tr>                
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Salario</td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>

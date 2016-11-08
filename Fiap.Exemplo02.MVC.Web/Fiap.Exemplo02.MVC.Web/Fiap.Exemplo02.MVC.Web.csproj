@@ -167,6 +167,7 @@
     <Compile Include="Controllers\AlunoController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Models\Aluno.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
@@ -190,6 +191,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Grupo.cs">
+      <DependentUpon>Banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Professor.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Projeto.cs">
@@ -219,6 +223,8 @@
     <Content Include="Views\Grupo\Listar.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Grupo\Alterar.cshtml" />
+    <Content Include="Views\Professor\Cadastrar.cshtml" />
+    <Content Include="Views\Professor\Lista.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

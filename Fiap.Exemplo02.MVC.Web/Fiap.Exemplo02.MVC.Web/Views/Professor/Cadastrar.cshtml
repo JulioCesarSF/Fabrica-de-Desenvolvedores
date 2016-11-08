@@ -1,0 +1,38 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Professor
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+@Juliao.Titulo("Cadastrar Professor")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="@TempData["tipoMensagem"]">
+            <p>@TempData["mensagem"]</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(p=>p.Nome)
+                @Html.TextBoxFor(p=>p.Nome, new { @class="form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(p => p.Salario)
+                @Html.TextBoxFor(p => p.Salario, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Juliao.Submit("Salvar")
+            </div>
+        }
+
+    </div>
+
+</div>

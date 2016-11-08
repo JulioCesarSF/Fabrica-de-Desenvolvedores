@@ -24,6 +24,22 @@
           <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Nota" Type="float" />
         </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Salario" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ProfessorAluno">
+          <Key>
+            <PropertyRef Name="ProfessorId" />
+            <PropertyRef Name="AlunoId" />
+          </Key>
+          <Property Name="ProfessorId" Type="int" Nullable="false" />
+          <Property Name="AlunoId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Projeto">
           <Key>
             <PropertyRef Name="Id" />
@@ -47,6 +63,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfessorAluno_Aluno">
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="1" />
+          <End Role="ProfessorAluno" Type="Self.ProfessorAluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfessorAluno">
+              <PropertyRef Name="AlunoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfessorAluno_Professor">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
+          <End Role="ProfessorAluno" Type="Self.ProfessorAluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfessorAluno">
+              <PropertyRef Name="ProfessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Projeto_Grupo">
           <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
           <End Role="Projeto" Type="Self.Projeto" Multiplicity="0..1" />
@@ -62,10 +102,20 @@
         <EntityContainer Name="FiapExemplo02DatabaseModelStoreContainer">
           <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfessorAluno" EntityType="Self.ProfessorAluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projeto" EntityType="Self.Projeto" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Aluno_Grupo" Association="Self.FK_Aluno_Grupo">
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfessorAluno_Aluno" Association="Self.FK_ProfessorAluno_Aluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="ProfessorAluno" EntitySet="ProfessorAluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfessorAluno_Professor" Association="Self.FK_ProfessorAluno_Professor">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="ProfessorAluno" EntitySet="ProfessorAluno" />
           </AssociationSet>
           <AssociationSet Name="FK_Projeto_Grupo" Association="Self.FK_Projeto_Grupo">
             <End Role="Grupo" EntitySet="Grupo" />
@@ -87,6 +137,7 @@
           <Property Name="Desconto" Type="Double" />
           <Property Name="GrupoId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Grupo" Relationship="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo" FromRole="Aluno" ToRole="Grupo" />
+          <NavigationProperty Name="Professor" Relationship="Fiap.Exemplo02.Database.Model.ProfessorAluno" FromRole="Aluno" ToRole="Professor" />
         </EntityType>
         <EntityContainer Name="PortalContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Aluno" EntityType="Self.Aluno" />
@@ -99,6 +150,11 @@
           <AssociationSet Name="FK_Aluno_Grupo" Association="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo">
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <EntitySet Name="Professor" EntityType="Fiap.Exemplo02.Database.Model.Professor" />
+          <AssociationSet Name="ProfessorAluno" Association="Fiap.Exemplo02.Database.Model.ProfessorAluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="Professor" EntitySet="Professor" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grupo">
@@ -147,6 +203,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Salario" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Aluno" Relationship="Fiap.Exemplo02.Database.Model.ProfessorAluno" FromRole="Professor" ToRole="Aluno" />
+        </EntityType>
+        <Association Name="ProfessorAluno">
+          <End Type="Fiap.Exemplo02.Database.Model.Aluno" Role="Aluno" Multiplicity="*" />
+          <End Type="Fiap.Exemplo02.Database.Model.Professor" Role="Professor" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -186,6 +255,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Professor">
+            <EntityTypeMapping TypeName="Fiap.Exemplo02.Database.Model.Professor">
+              <MappingFragment StoreEntitySet="Professor">
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProfessorAluno" TypeName="Fiap.Exemplo02.Database.Model.ProfessorAluno" StoreEntitySet="ProfessorAluno">
+            <EndProperty Name="Professor">
+              <ScalarProperty Name="Id" ColumnName="ProfessorId" />
+            </EndProperty>
+            <EndProperty Name="Aluno">
+              <ScalarProperty Name="Id" ColumnName="AlunoId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

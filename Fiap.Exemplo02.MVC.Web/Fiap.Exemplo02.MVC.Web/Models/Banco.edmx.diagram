@@ -10,6 +10,8 @@
         <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Projeto" Width="1.5" PointX="5.125" PointY="0.5" />
         <AssociationConnector Association="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo" />
         <AssociationConnector Association="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Professor" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="Fiap.Exemplo02.Database.Model.ProfessorAluno" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
