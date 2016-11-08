@@ -35,7 +35,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Listar()
         {
             //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
-            IList<Aluno> _lista = new PortalContext().Aluno.ToList();
+            IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
             return View(_lista);
         }
 
