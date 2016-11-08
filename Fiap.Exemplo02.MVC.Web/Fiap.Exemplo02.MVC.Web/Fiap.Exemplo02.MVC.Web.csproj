@@ -224,7 +224,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Grupo\Alterar.cshtml" />
     <Content Include="Views\Professor\Cadastrar.cshtml" />
-    <Content Include="Views\Professor\Lista.cshtml" />
+    <Content Include="Views\Professor\Listar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

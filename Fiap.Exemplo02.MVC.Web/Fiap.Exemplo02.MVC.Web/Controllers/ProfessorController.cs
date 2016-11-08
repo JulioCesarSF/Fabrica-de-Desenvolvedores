@@ -27,7 +27,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Lista()
+        public ActionResult Listar()
         {
             var con = new PortalContext();
             var _lista = con.Professor.ToList();
