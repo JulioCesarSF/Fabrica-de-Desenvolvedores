@@ -14,6 +14,7 @@
           <Property Name="DataNascimento" Type="datetime" Nullable="false" />
           <Property Name="Bolsa" Type="bit" Nullable="false" />
           <Property Name="Desconto" Type="float" />
+          <Property Name="GrupoId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Grupo">
           <Key>
@@ -34,6 +35,18 @@
           <Property Name="DataTermino" Type="datetime" />
           <Property Name="Entregue" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Aluno_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="GrupoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Projeto_Grupo">
           <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
           <End Role="Projeto" Type="Self.Projeto" Multiplicity="0..1" />
@@ -50,6 +63,10 @@
           <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projeto" EntityType="Self.Projeto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Aluno_Grupo" Association="Self.FK_Aluno_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
           <AssociationSet Name="FK_Projeto_Grupo" Association="Self.FK_Projeto_Grupo">
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Projeto" EntitySet="Projeto" />
@@ -68,6 +85,8 @@
           <Property Name="DataNascimento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Bolsa" Type="Boolean" Nullable="false" />
           <Property Name="Desconto" Type="Double" />
+          <Property Name="GrupoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grupo" Relationship="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo" FromRole="Aluno" ToRole="Grupo" />
         </EntityType>
         <EntityContainer Name="PortalContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Aluno" EntityType="Self.Aluno" />
@@ -76,6 +95,10 @@
           <AssociationSet Name="FK_Projeto_Grupo" Association="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo">
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Projeto" EntitySet="Projeto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aluno_Grupo" Association="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Aluno" EntitySet="Aluno" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grupo">
@@ -86,6 +109,7 @@
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Nota" Type="Double" />
           <NavigationProperty Name="Projeto" Relationship="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo" FromRole="Grupo" ToRole="Projeto" />
+          <NavigationProperty Name="Aluno" Relationship="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo" FromRole="Grupo" ToRole="Aluno" />
         </EntityType>
         <EntityType Name="Projeto">
           <Key>
@@ -111,6 +135,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Aluno_Grupo">
+          <End Type="Fiap.Exemplo02.Database.Model.Grupo" Role="Grupo" Multiplicity="1" />
+          <End Type="Fiap.Exemplo02.Database.Model.Aluno" Role="Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="GrupoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -120,6 +156,7 @@
           <EntitySetMapping Name="Aluno">
             <EntityTypeMapping TypeName="Fiap.Exemplo02.Database.Model.Aluno">
               <MappingFragment StoreEntitySet="Aluno">
+                <ScalarProperty Name="GrupoId" ColumnName="GrupoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />

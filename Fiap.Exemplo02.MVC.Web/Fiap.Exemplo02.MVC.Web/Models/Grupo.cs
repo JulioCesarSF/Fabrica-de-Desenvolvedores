@@ -11,16 +11,21 @@ namespace Fiap.Exemplo02.MVC.Web.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Grupo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Grupo()
+        {
+            this.Aluno = new HashSet<Aluno>();
+        }
+    
         public int Id { get; set; }
-        [Display(Name = "Nome")]
         public string Nome { get; set; }
-        [Display(Name = "Nota")]
         public Nullable<double> Nota { get; set; }
-        [Display(Name = "Projeto")]
+    
         public virtual Projeto Projeto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Aluno> Aluno { get; set; }
     }
 }
