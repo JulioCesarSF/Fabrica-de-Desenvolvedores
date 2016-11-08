@@ -13,6 +13,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Cadastrar()
         {
+            //buscar todos
+            var context = new PortalContext();
+            var lista = context.Grupo.ToList();
+            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
             return View();
         }
 

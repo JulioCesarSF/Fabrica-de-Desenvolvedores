@@ -34,8 +34,13 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(a=>a.Grupo)
+                @Html.DropDownListFor()
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(a=>a.Bolsa)
-                @Html.CheckBoxFor(a=>a.Bolsa)
+                @Html.DropDownListFor(a=>a.GrupoId, ViewBag.grupos as SelectList)
             </div>
 
             @Juliao.Submit("Salvar")
