@@ -14,12 +14,11 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         // GET: Aluno
         [HttpGet]
         public ActionResult Cadastrar()
-        {
-            
+        {            
             //buscar todos
-            var context = new PortalContext();
-            var lista = context.Grupo.ToList();
-            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
+            //var context = new PortalContext();
+            //var lista = context.Grupo.ToList();
+            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
             return View();
         }
 
@@ -28,9 +27,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         {
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Cadastrado com sucesso";
-            var context = new PortalContext();
-            context.Aluno.Add(aluno);
-            context.SaveChanges();
+            //var context = new PortalContext();
+            //context.Aluno.Add(aluno);
+            //context.SaveChanges();
+            _unit.AlunoRepository.Cadastrar(aluno);
             return RedirectToAction("Cadastrar");
         }
 
@@ -38,17 +38,20 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Listar()
         {
             //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
-            IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
-            return View(_lista);
+            // IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
+
+           // IList<Aluno> _lista = _unit.AlunoRepository.Listar();
+            return View(_unit.AlunoRepository.Listar());
         }
 
         [HttpPost]
-        public ActionResult Excluir(string id)
+        public ActionResult Excluir(int id)
         {
-            var context = new PortalContext();
-            Aluno a = context.Aluno.Find(int.Parse(id));
-            context.Aluno.Remove(a);
-            context.SaveChanges();
+            //var context = new PortalContext();
+            //Aluno a = context.Aluno.Find(int.Parse(id));
+            //context.Aluno.Remove(a);
+            _unit.AlunoRepository.Remover(id);
+            _unit.Save();
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno formatado";
             return RedirectToAction("Listar");
@@ -59,10 +62,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Editar(int id)
         {
             //buscar o objeto (aluno) no banco
-            var context = new PortalContext();
-            var aluno = context.Aluno.Find(id);
+           // var context = new PortalContext();
+           // var aluno = context.Aluno.Find(id);
             //manda o aluno para a view
-            return View(aluno);
+            return View(_unit.AlunoRepository.BuscarPorId(id));
         }
         
         [HttpPost]
@@ -73,13 +76,15 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             context.SaveChanges();
             */
 
-            var context = new PortalContext();
-            var a = context.Aluno.Find(aluno.Id);
-            a.Nome = aluno.Nome;
-            a.DataNascimento = aluno.DataNascimento;
-            a.Bolsa = aluno.Bolsa;
-            a.Desconto = aluno.Desconto;
-            context.SaveChanges();
+            _unit.AlunoRepository.Atualizar(aluno);
+
+            //var context = new PortalContext();
+            //var a = context.Aluno.Find(aluno.Id);
+            //a.Nome = aluno.Nome;
+            //a.DataNascimento = aluno.DataNascimento;
+            //a.Bolsa = aluno.Bolsa;
+            //a.Desconto = aluno.Desconto;
+            _unit.Save();
 
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno atualizado";
@@ -89,9 +94,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Buscar(String nomeBusca)
         {
-            var context = new PortalContext();
-            var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
-            return View("Listar", a);
+            //var context = new PortalContext();
+            //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
+            return View("Listar", 
+                _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca)).ToList());
         }
 
         protected override void Dispose(bool disposing)
