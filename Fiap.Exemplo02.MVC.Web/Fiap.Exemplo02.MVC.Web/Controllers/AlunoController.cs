@@ -1,4 +1,5 @@
 ﻿using Fiap.Exemplo02.MVC.Web.Models;
+using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 {
     public class AlunoController : Controller
     {
+        private UnitOfWork _unit = new UnitOfWork();
         // GET: Aluno
         [HttpGet]
         public ActionResult Cadastrar()
         {
+            
             //buscar todos
             var context = new PortalContext();
             var lista = context.Grupo.ToList();
@@ -89,6 +92,12 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var context = new PortalContext();
             var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
             return View("Listar", a);
-        }            
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _unit.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
