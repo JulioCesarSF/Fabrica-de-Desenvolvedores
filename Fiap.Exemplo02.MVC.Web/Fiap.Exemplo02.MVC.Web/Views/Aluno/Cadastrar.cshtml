@@ -35,12 +35,12 @@
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.Grupo)
-                @Html.DropDownListFor(a=>a.Grupo.Id, ViewBag.grupos as SelectList, "Selecione", new { @class="form-control" })
+                @Html.DropDownListFor(a=>a.GrupoId, ViewBag.grupos as SelectList, "Selecione", new { @class="form-control" })
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.Bolsa)
-                @Html.DropDownListFor(a=>a.GrupoId, ViewBag.grupos as SelectList)
+                @Html.CheckBoxFor(a=>a.Bolsa)
             </div>
 
             @Juliao.Submit("Salvar")
