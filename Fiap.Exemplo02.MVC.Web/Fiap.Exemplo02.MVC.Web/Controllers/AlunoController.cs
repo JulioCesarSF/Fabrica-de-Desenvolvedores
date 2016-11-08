@@ -97,7 +97,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //var context = new PortalContext();
             //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
             return View("Listar", 
-                _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca)).ToList());
+                _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca)));
         }
 
         protected override void Dispose(bool disposing)
