@@ -24,10 +24,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
         [HttpPost]
         public ActionResult Cadastrar(Aluno aluno)
-        {            
+        {
             //var context = new PortalContext();
             //context.Aluno.Add(aluno);
-            //context.SaveChanges();
+            //context.SaveChanges();            
             _unit.AlunoRepository.Cadastrar(aluno);
             _unit.Save();
 
