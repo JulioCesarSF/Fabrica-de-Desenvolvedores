@@ -62,6 +62,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //g.Nome = grupo.Nome;
             //g.Nota = grupo.Nota;   
             //con.SaveChanges();
+            _unit.
+
             _unit.GrupoRepository.Atualizar(grupo);
             _unit.Save();
             TempData["tipoMensagem"] = "alert alert-success";

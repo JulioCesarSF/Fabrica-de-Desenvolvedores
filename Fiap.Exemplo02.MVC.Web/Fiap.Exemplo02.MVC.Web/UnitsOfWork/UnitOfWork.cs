@@ -14,11 +14,9 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
 
         private IAlunoRepository _alunoRepository;
         private IGrupoRepository _grupoRepository;
-        private IProjetoRepository _projetoRepository;
+        private IProjetoRepository _projetoRepository;       
 
-        private IProjetoRepository ProjetoRepository;
-
-        public IProjetoRepository MyProperty
+        public IProjetoRepository ProjetoRepository
         {
             get
             {
@@ -26,9 +24,9 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
                 {
                     _projetoRepository = new ProjetoRepository(_context);
                 }
-                return ProjetoRepository;
+                return _projetoRepository;
             }
-            set { ProjetoRepository = value; }
+            set { _projetoRepository = value; }
         }
 
 
