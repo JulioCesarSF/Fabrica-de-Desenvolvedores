@@ -12,9 +12,25 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
     {
         private PortalContext _context = new PortalContext();
 
-        private IAlunoRepository _alunoRepository;        
-
+        private IAlunoRepository _alunoRepository;
         private IGrupoRepository _grupoRepository;
+        private IProjetoRepository _projetoRepository;
+
+        private IProjetoRepository ProjetoRepository;
+
+        public IProjetoRepository MyProperty
+        {
+            get
+            {
+                if(_projetoRepository == null)
+                {
+                    _projetoRepository = new ProjetoRepository(_context);
+                }
+                return ProjetoRepository;
+            }
+            set { ProjetoRepository = value; }
+        }
+
 
         public IGrupoRepository GrupoRepository
         {

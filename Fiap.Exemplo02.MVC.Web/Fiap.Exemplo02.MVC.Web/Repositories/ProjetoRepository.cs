@@ -11,6 +11,12 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
     public class ProjetoRepository : IProjetoRepository
     {
         private PortalContext _context;
+
+        public ProjetoRepository(PortalContext _context)
+        {
+            this._context = _context;
+        }
+
         public void Atualizar(Projeto projeto)
         {
             _context.Entry(projeto).State = EntityState.Modified;
