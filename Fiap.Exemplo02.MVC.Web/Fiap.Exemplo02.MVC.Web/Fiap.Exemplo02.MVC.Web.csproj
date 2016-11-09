@@ -204,6 +204,7 @@
     <Compile Include="Repositories\GrupoRepository.cs" />
     <Compile Include="Repositories\IAlunoRepository.cs" />
     <Compile Include="Repositories\IGrupoRepository.cs" />
+    <Compile Include="Repositories\IProjetoRepository.cs" />
     <Compile Include="UnitsOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
