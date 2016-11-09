@@ -10,8 +10,8 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
     public interface IProjetoRepository
     {
-        void Cadastrar(Projeto aluno);
-        void Atualizar(Projeto aluno);
+        void Cadastrar(Projeto projeto);
+        void Atualizar(Projeto projeto);
         void Remover(int id);
         Projeto BuscarPorId(int id);
         ICollection<Projeto> Listar();
