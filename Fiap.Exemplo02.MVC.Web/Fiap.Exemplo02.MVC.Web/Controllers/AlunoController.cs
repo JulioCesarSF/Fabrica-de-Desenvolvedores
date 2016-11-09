@@ -24,14 +24,16 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
         [HttpPost]
         public ActionResult Cadastrar(Aluno aluno)
-        {
-            TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Cadastrado com sucesso";
+        {            
             //var context = new PortalContext();
             //context.Aluno.Add(aluno);
             //context.SaveChanges();
             _unit.AlunoRepository.Cadastrar(aluno);
-            //_unit.Save();
+            _unit.Save();
+
+            TempData["tipoMensagem"] = "alert alert-success";
+            TempData["mensagem"] = "Cadastrado com sucesso";
+
             return RedirectToAction("Cadastrar");
         }
 
@@ -54,7 +56,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             _unit.AlunoRepository.Remover(id);
             _unit.Save();
             TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Aluno formatado";
+            TempData["mensagem"] = "Aluno exterminado!";
             return RedirectToAction("Listar");
         }
 
