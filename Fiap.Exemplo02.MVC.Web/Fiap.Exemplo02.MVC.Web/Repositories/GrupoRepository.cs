@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using Fiap.Exemplo02.MVC.Web.Models;
+using System.Data.Entity;
 
 namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
@@ -17,22 +18,22 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
         }
         public void Atualizar(Grupo grupo)
         {
-            throw new NotImplementedException();
+            _context.Entry(grupo).State = EntityState.Modified;
         }
 
         public ICollection<Grupo> BuscarPor(Expression<Func<Grupo, bool>> filtro)
         {
-            throw new NotImplementedException();
+            return _context.Grupo.Where(filtro).ToList();
         }
 
         public Grupo BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return _context.Grupo.Find(id);
         }
 
         public void Cadastrar(Grupo grupo)
         {
-            throw new NotImplementedException();
+            _context.Grupo.Add(grupo);
         }
 
         public ICollection<Grupo> Listar()
@@ -42,7 +43,7 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            _context.Grupo.Remove(BuscarPorId(id));
         }
     }
 }
