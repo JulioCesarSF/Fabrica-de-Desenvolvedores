@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using Fiap.Exemplo02.MVC.Web.Models;
+using System.Data.Entity;
 
 namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
@@ -19,7 +20,7 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
         public void Atualizar(Aluno aluno)
         {
             //_context.Entry(aluno).State = Ssytem.Data.Entity.EntityState.Mod...
-            _context.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
+            _context.Entry(aluno).State = EntityState.Modified;
             //_context.Aluno.Find(aluno);            
         }
 
@@ -40,7 +41,8 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 
         public ICollection<Aluno> Listar()
         {
-            return _context.Aluno.ToList();
+            //return _context.Aluno.ToList();
+            return _context.Aluno.Include("Grupo").ToList();
         }
 
         public void Remover(int id)
