@@ -62,8 +62,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //g.Nome = grupo.Nome;
             //g.Nota = grupo.Nota;   
             //con.SaveChanges();
-            _unit.
-
+            _unit.ProjetoRepository.Atualizar(grupo.Projeto);
             _unit.GrupoRepository.Atualizar(grupo);
             _unit.Save();
             TempData["tipoMensagem"] = "alert alert-success";
@@ -80,6 +79,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //var gg = con.Grupo.Find(id);
             //con.Grupo.Remove(gg);
             //con.SaveChanges();
+            _unit.ProjetoRepository.Remover(id);
             _unit.GrupoRepository.Remover(id);
             _unit.Save();
             TempData["tipoMensagem"] = "alert alert-success";
