@@ -107,7 +107,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             context.SaveChanges();
             */
 
-            _unit.AlunoRepository.Atualizar(aluno);
+            _unit.AlunoRepository.Alterar(aluno);
 
             //var context = new PortalContext();
             //var a = context.Aluno.Find(aluno.Id);

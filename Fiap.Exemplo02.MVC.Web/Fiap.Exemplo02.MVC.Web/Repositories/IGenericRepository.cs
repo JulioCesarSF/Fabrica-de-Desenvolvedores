@@ -15,5 +15,7 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
         ICollection<T> Listar();
         T BuscarPorId(int id);
         ICollection<T> BuscarPor(Expression<Func<T, bool>> filtro);
+
+
     }
 }
