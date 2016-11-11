@@ -9,9 +9,15 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
     public class ProfessorRepository : GenericRepository<Professor>, IProfessorRepository
     {
-        public void Promocao(double valor)
+        public ProfessorRepository(PortalContext context) : base(context)
         {
-            throw new NotImplementedException();
+
+        }
+
+        public void Promocao(decimal valor, int id)
+        {
+            var prof = BuscarPorId(id);
+            prof.Salario = valor;
         }
     }
 }
