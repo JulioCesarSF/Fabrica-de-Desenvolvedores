@@ -10,7 +10,11 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 {
     public class AlunoController : Controller
     {
+        #region FIELD
         private UnitOfWork _unit = new UnitOfWork();
+        #endregion
+
+        #region GET
         // GET: Aluno
         [HttpGet]
         public ActionResult Cadastrar()
@@ -21,6 +25,51 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Listar()
+        {
+            //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
+            // IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
+
+            // IList<Aluno> _lista = _unit.AlunoRepository.Listar();
+
+            CarregarComboGrupos();
+            return View(_unit.AlunoRepository.Listar());
+        }      
+
+        [HttpGet]
+        //(int id) para receber o id do view
+        public ActionResult Editar(int id)
+        {
+            //buscar o objeto (aluno) no banco
+            // var context = new PortalContext();
+            // var aluno = context.Aluno.Find(id);
+            //manda o aluno para a view
+            return View(_unit.AlunoRepository.BuscarPorId(id));
+        }
+
+        [HttpGet]
+        public ActionResult Buscar(String nomeBusca, int? idGrupo) //paramatro nao obrigatorio ?
+        {
+            //var context = new PortalContext();
+            //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
+            ICollection<Aluno> l;
+            if (idGrupo == null)
+            {
+                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
+            }
+            else
+            {
+                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca) && aa.GrupoId == idGrupo);
+            }
+
+            CarregarComboGrupos();
+            return View("Listar", l);
+        }
+        #endregion
+
+        #region POST
 
         [HttpPost]
         public ActionResult Cadastrar(Aluno aluno)
@@ -35,20 +84,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["mensagem"] = "Cadastrado com sucesso";
 
             return RedirectToAction("Cadastrar");
-        }
-
-        [HttpGet]
-        public ActionResult Listar()
-        {
-            //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
-            // IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
-
-            // IList<Aluno> _lista = _unit.AlunoRepository.Listar();
-
-            //enviar para a tela os grupos para o "select"
-            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
-            return View(_unit.AlunoRepository.Listar());
-        }
+        }       
 
         [HttpPost]
         public ActionResult Excluir(int id)
@@ -61,18 +97,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno exterminado!";
             return RedirectToAction("Listar");
-        }
-
-        [HttpGet]
-        //(int id) para receber o id do view
-        public ActionResult Editar(int id)
-        {
-            //buscar o objeto (aluno) no banco
-           // var context = new PortalContext();
-           // var aluno = context.Aluno.Find(id);
-            //manda o aluno para a view
-            return View(_unit.AlunoRepository.BuscarPorId(id));
-        }
+        }       
         
         [HttpPost]
         public ActionResult Editar(Aluno aluno)
@@ -95,31 +120,26 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno atualizado";
             return RedirectToAction("Listar");
-        } 
-        
-        [HttpGet]
-        public ActionResult Buscar(String nomeBusca, int? idGrupo) //paramatro nao obrigatorio ?
-        {
-            //var context = new PortalContext();
-            //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
-            ICollection<Aluno> l;
-            if (idGrupo == null)
-            {
-                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
-            }
-            else
-            {
-                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca) && aa.GrupoId == idGrupo);
-            }
-
-            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
-            return View("Listar", l);
         }
 
+        #endregion
+
+        #region PRIVATE
+
+        private void CarregarComboGrupos()
+        {
+            //enviar para a tela os grupos para o "select"
+            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
+        }
+        #endregion
+
+        #region DISPOSE
         protected override void Dispose(bool disposing)
         {
             _unit.Dispose();
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }
