@@ -12,17 +12,35 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
     {
         private PortalContext _context = new PortalContext();
 
-        private IAlunoRepository _alunoRepository;
-        private IGrupoRepository _grupoRepository;
-        private IProjetoRepository _projetoRepository;       
+        //private IAlunoRepository _alunoRepository;
+        //private IGrupoRepository _grupoRepository;
+        //private IProjetoRepository _projetoRepository;
+        private IGenericRepository<Projeto> _projetoRepository;
+        private IGenericRepository<Grupo> _grupoRepository;
+        private IGenericRepository<Aluno> _alunoRepository;
+        private IGenericRepository<Professor> _professorRepository;
+        
+        public IGenericRepository<Professor> ProfessorRepository
+        {
+            get
+            {
+                if(_professorRepository == null)
+                {
+                    _professorRepository = new GenericRepository<Professor>(_context);
+                }
 
-        public IProjetoRepository ProjetoRepository
+                return _professorRepository;
+            }
+            set { _professorRepository = value; }
+        }      
+
+        public IGenericRepository<Projeto> ProjetoRepository
         {
             get
             {
                 if(_projetoRepository == null)
                 {
-                    _projetoRepository = new ProjetoRepository(_context);
+                    _projetoRepository = new GenericRepository<Projeto>(_context);
                 }
                 return _projetoRepository;
             }
@@ -30,13 +48,13 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         }
 
 
-        public IGrupoRepository GrupoRepository
+        public IGenericRepository<Grupo> GrupoRepository
         {
             get
             {
                 if(_grupoRepository == null)
                 {
-                    _grupoRepository = new GrupoRepository(_context);
+                    _grupoRepository = new GenericRepository<Grupo>(_context);
                 }
                 return _grupoRepository;
             }
@@ -44,13 +62,13 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         }
 
 
-        public IAlunoRepository AlunoRepository
+        public IGenericRepository<Aluno> AlunoRepository
         {
             get
             {
                 if (_alunoRepository == null)
                 {
-                    _alunoRepository = new AlunoRepository(_context);
+                    _alunoRepository = new GenericRepository<Aluno>(_context);
                 }
                 return _alunoRepository;
             }
