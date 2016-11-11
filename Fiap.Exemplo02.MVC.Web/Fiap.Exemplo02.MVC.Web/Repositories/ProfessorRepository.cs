@@ -17,7 +17,7 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
         public void Promocao(decimal valor, int id)
         {
             var prof = BuscarPorId(id);
-            prof.Salario = valor;
+            prof.Salario += prof.Salario * valor;
         }
     }
 }

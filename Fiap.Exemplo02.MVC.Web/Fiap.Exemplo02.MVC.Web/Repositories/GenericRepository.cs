@@ -9,40 +9,40 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private PortalContext _context;
-        private DbSet<T> _dbset;
+        protected PortalContext _context;
+        protected DbSet<T> _dbset;
 
         public GenericRepository(PortalContext context)
         {
             _context = context;
             _dbset = _context.Set<T>();
         }
-        public void Alterar(T entidade)
+        public virtual void Alterar(T entidade)
         {
             _context.Entry(entidade).State = EntityState.Modified;
         }
 
-        public ICollection<T> BuscarPor(System.Linq.Expressions.Expression<Func<T, bool>> filtro)
+        public virtual ICollection<T> BuscarPor(System.Linq.Expressions.Expression<Func<T, bool>> filtro)
         {
             return _dbset.Where(filtro).ToList();
         }
 
-        public T BuscarPorId(int id)
+        public virtual T BuscarPorId(int id)
         {
             return _dbset.Find(id);
         }
 
-        public void Cadastrar(T entidade)
+        public virtual void Cadastrar(T entidade)
         {
             _context.Entry(entidade).State = EntityState.Added;
         }
 
-        public ICollection<T> Listar()
+        public virtual ICollection<T> Listar()
         {
             return _dbset.ToList();
         }
 
-        public void Remover(int id)
+        public virtual void Remover(int id)
         {
             _dbset.Remove(BuscarPorId(id));
         }
