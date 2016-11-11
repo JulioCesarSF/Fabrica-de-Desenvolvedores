@@ -201,8 +201,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlunoRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\GrupoRepository.cs" />
     <Compile Include="Repositories\IAlunoRepository.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\IGrupoRepository.cs" />
     <Compile Include="Repositories\IProjetoRepository.cs" />
     <Compile Include="Repositories\ProjetoRepository.cs" />

@@ -1,0 +1,42 @@
+grupo 1
+allan
+danilo f.
+vitor capuano
+danilo losi
+
+grupo 2
+bruno
+felipe nelli
+salome
+thiago
+
+grupo 3
+mazola fernando_mazola@hotmail.com
+flávio 
+victor
+julio
+
+grupo 4
+janifer
+venicimo
+kenzo
+david
+
+grupo 5
+marcelo
+natalia
+julio a.
+vinicius
+
+grupo 6
+william
+henrique
+william 
+julio
+
+
+
+1- Criar um repositório no de git : Bitcucket
+2- Trello / Asana
+3- Deploy -> Azure
+
