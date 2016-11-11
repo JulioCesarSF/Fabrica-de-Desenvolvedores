@@ -43,7 +43,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
             // IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
 
-           // IList<Aluno> _lista = _unit.AlunoRepository.Listar();
+            // IList<Aluno> _lista = _unit.AlunoRepository.Listar();
+
+            //enviar para a tela os grupos para o "select"
+            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
             return View(_unit.AlunoRepository.Listar());
         }
 
@@ -95,12 +98,22 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         } 
         
         [HttpGet]
-        public ActionResult Buscar(String nomeBusca)
+        public ActionResult Buscar(String nomeBusca, int? idGrupo) //paramatro nao obrigatorio ?
         {
             //var context = new PortalContext();
             //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
-            return View("Listar", 
-                _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca)));
+            ICollection<Aluno> l;
+            if (idGrupo == null)
+            {
+                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
+            }
+            else
+            {
+                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca) && aa.GrupoId == idGrupo);
+            }
+
+            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
+            return View("Listar", l);
         }
 
         protected override void Dispose(bool disposing)

@@ -20,10 +20,17 @@
             @Html.TextBox("nomeBusca", "", new { placeholder = "Digite um Nome", @class = "form-control" })
         </div>
         <div class="col-md-3">
-            @Juliao.SubmitSemDiv("Buscar", "btn btn-success btn-sm")
+            @Html.DropDownList("idGrupo", ViewBag.grupos as SelectList, 
+                                    "Todos os Grupos", new { @class ="form-control"})
+        </div>
+
+        <div class="col-md-3">
+            @Juliao.SubmitSemDiv("Filtrar", "btn btn-success btn-sm")
         </div> 
 }
 </div>
+
+
 
 <br />
 
@@ -50,7 +57,7 @@
                         <td>@item.DataNascimento.ToShortDateString()</td>
                         <td>@item.Desconto</td>
                         <td>@item.Bolsa</td>
-                        <td>@item.Grupo.Nome</td>
+                        <td>@item.GrupoId</td>
                         <td> 
 
                             <button onclick="IDID.value=@item.Id" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
