@@ -24,7 +24,6 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         private IProfessorRepository _professorRepository;
 
         #endregion
-
         #region Gets
         public IProfessorRepository ProfessorRepository
         {
@@ -82,7 +81,6 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         }
 
         #endregion
-
         #region Dispose
         public void Dispose()
         {
