@@ -1,5 +1,6 @@
 ﻿using Fiap.Exemplo02.MVC.Web.Models;
 using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
+using Fiap.Exemplo02.MVC.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +18,31 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         #region GET
         // GET: Aluno
         [HttpGet]
-        public ActionResult Cadastrar()
-        {            
-            //buscar todos
-            //var context = new PortalContext();
-            //var lista = context.Grupo.ToList();
-            ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
-            return View();
+        public ActionResult Cadastrar(string msg)
+        {
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                Mensagem = msg,
+               // TipoMensagem = tipoMsg
+                
+                
+            };
+
+            return View(viewModel);
+        }
+
+        private SelectList ListarGrupos()
+        {
+
+            return new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
         }
 
         [HttpGet]
         public ActionResult Listar()
         {
+
+
             //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
             // IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
 
@@ -36,7 +50,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
             CarregarComboGrupos();
             return View(_unit.AlunoRepository.Listar());
-        }      
+        }
 
         [HttpGet]
         //(int id) para receber o id do view
@@ -72,19 +86,30 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         #region POST
 
         [HttpPost]
-        public ActionResult Cadastrar(Aluno aluno)
+        public ActionResult Cadastrar(AlunoViewModel alunoViewModel)
         {
-            //var context = new PortalContext();
-            //context.Aluno.Add(aluno);
-            //context.SaveChanges();            
+
+            var aluno = new Aluno()
+            {
+                Nome = alunoViewModel.Nome,
+                DataNascimento = alunoViewModel.DataNascimento,
+                Bolsa = alunoViewModel.Bolsa,
+                Desconto = alunoViewModel.Desconto,
+                GrupoId = alunoViewModel.GrupoId                
+            };
+
+            //var viewModel = new AlunoViewModel()
+            //{
+            //    TipoMensagem = "alert alert-success",
+            //    Mensagem = "Cadastrado com sucesso!",
+            //    ListaGrupo = ListarGrupos()
+            //};
+
             _unit.AlunoRepository.Cadastrar(aluno);
             _unit.Save();
 
-            TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Cadastrado com sucesso";
-
-            return RedirectToAction("Cadastrar");
-        }       
+            return RedirectToAction("Cadastrar", new { msg = "Aluno Cadastrado" });
+        }
 
         [HttpPost]
         public ActionResult Excluir(int id)
@@ -97,8 +122,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno exterminado!";
             return RedirectToAction("Listar");
-        }       
-        
+        }
+
         [HttpPost]
         public ActionResult Editar(Aluno aluno)
         {
