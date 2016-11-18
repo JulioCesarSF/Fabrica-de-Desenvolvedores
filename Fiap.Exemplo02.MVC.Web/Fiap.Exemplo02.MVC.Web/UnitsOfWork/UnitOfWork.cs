@@ -10,7 +10,6 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
 {
     public class UnitOfWork : IDisposable
     {
-
         #region Fields
         private PortalContext _context = new PortalContext();
 
