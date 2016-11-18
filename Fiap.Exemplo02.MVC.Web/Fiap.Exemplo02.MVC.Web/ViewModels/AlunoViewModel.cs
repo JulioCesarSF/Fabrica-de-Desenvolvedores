@@ -19,6 +19,8 @@ namespace Fiap.Exemplo02.MVC.Web.ViewModels
 
         #region Aluno Properties
         public int Id { get; set; }
+        [StringLength(100)]
+        [Required(ErrorMessage ="Nome é obrigatório")]
         public string Nome { get; set; }
         [Display(Name="Data de Nascimento")]
         public DateTime DataNascimento { get; set; }

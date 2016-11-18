@@ -126,27 +126,34 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(AlunoViewModel alunoViewModel)
         {
-
-            var aluno = new Aluno()
+            if (ModelState.IsValid)
             {
-                Nome = alunoViewModel.Nome,
-                DataNascimento = alunoViewModel.DataNascimento,
-                Bolsa = alunoViewModel.Bolsa,
-                Desconto = alunoViewModel.Desconto,
-                GrupoId = alunoViewModel.GrupoId
-            };
+                var aluno = new Aluno()
+                {
+                    Nome = alunoViewModel.Nome,
+                    DataNascimento = alunoViewModel.DataNascimento,
+                    Bolsa = alunoViewModel.Bolsa,
+                    Desconto = alunoViewModel.Desconto,
+                    GrupoId = alunoViewModel.GrupoId
+                };
 
-            //var viewModel = new AlunoViewModel()
-            //{
-            //    TipoMensagem = "alert alert-success",
-            //    Mensagem = "Cadastrado com sucesso!",
-            //    ListaGrupo = ListarGrupos()
-            //};
+                //var viewModel = new AlunoViewModel()
+                //{
+                //    TipoMensagem = "alert alert-success",
+                //    Mensagem = "Cadastrado com sucesso!",
+                //    ListaGrupo = ListarGrupos()
+                //};
 
-            _unit.AlunoRepository.Cadastrar(aluno);
-            _unit.Save();
+                _unit.AlunoRepository.Cadastrar(aluno);
+                _unit.Save();
 
-            return RedirectToAction("Cadastrar", new { msg = "Aluno Cadastrado" });
+                return RedirectToAction("Cadastrar", new { msg = "Aluno Cadastrado" });
+            }
+            else
+            {
+                alunoViewModel.ListaGrupo = ListarGrupos();
+                return View(alunoViewModel);
+            }
         }
 
         [HttpPost]

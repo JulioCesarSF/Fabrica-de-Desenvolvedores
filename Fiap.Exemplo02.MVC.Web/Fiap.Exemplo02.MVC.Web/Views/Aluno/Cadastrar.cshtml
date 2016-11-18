@@ -13,6 +13,8 @@
     </div>
 </div>
 
+@Html.ValidationSummary()
+
 <div class="row">
     <div class="col-md-12">
         @using (Html.BeginForm())
@@ -21,16 +23,19 @@
             <div class="form-group">
                 @Html.LabelFor(a=>a.Nome)
                 @Html.TextBoxFor(a=>a.Nome, new { @class="form-control" })
+                @Html.ValidationMessageFor(a=>a.Nome)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.DataNascimento)
                 @Html.TextBoxFor(a => a.DataNascimento, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.DataNascimento)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a => a.Desconto)
                 @Html.TextBoxFor(a=>a.Desconto, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Desconto)
             </div>
 
             <div class="form-group">
@@ -43,6 +48,7 @@
             <div class="form-group">
                 @Html.LabelFor(a=>a.Bolsa)
                 @Html.CheckBoxFor(a=>a.Bolsa)
+                @Html.ValidationMessageFor(a => a.Bolsa)
             </div>
 
             @Juliao.Submit("Salvar")
