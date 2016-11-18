@@ -24,9 +24,9 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             {
                 ListaGrupo = ListarGrupos(),
                 Mensagem = msg,
-               // TipoMensagem = tipoMsg
-                
-                
+                // TipoMensagem = tipoMsg
+
+
             };
 
             return View(viewModel);
@@ -39,7 +39,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Listar()
+        public ActionResult Listar(AlunoViewModel vM)
         {
 
 
@@ -48,9 +48,22 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
             // IList<Aluno> _lista = _unit.AlunoRepository.Listar();
 
-            CarregarComboGrupos();
-            return View(_unit.AlunoRepository.Listar());
+            var viewModel = new AlunoViewModel()
+            {
+                Alunos = CarregarAlunos(),
+                ListaGrupo = ListarGrupos()
+
+            };
+
+
+            return View(viewModel);
         }
+
+        private ICollection<Aluno> CarregarAlunos()
+        {
+            return _unit.AlunoRepository.Listar();
+        }
+
 
         [HttpGet]
         //(int id) para receber o id do view
@@ -64,22 +77,36 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Buscar(String nomeBusca, int? idGrupo) //paramatro nao obrigatorio ?
+        public ActionResult Buscar(String nomeBusca, int? idBusca) //paramatro nao obrigatorio ?
         {
-            //var context = new PortalContext();
+            var context = new PortalContext();
             //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
-            ICollection<Aluno> l;
-            if (idGrupo == null)
-            {
-                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
-            }
-            else
-            {
-                l = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca) && aa.GrupoId == idGrupo);
-            }
 
-            CarregarComboGrupos();
-            return View("Listar", l);
+            var lista = _unit.AlunoRepository.BuscarPor(aa => 
+                        aa.Nome.Contains(nomeBusca) && (aa.GrupoId == idBusca || idBusca == null));
+
+            var viewModel = new AlunoViewModel()
+            {
+                Alunos = lista,
+                ListaGrupo = ListarGrupos()
+            };
+
+           // viewModel.Alunos = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
+            
+
+            //ICollection<Aluno> l;
+            //if (idGrupo == null)
+            //{
+            //    viewModel.Alunos = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
+            //}
+            //else
+            //{
+            //    viewModel.Alunos = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca) && aa.GrupoId == idGrupo);        
+            //}
+
+            //viewModel.ListaGrupo = ListarGrupos();
+           
+            return View("Listar", viewModel);
         }
         #endregion
 
@@ -95,7 +122,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                 DataNascimento = alunoViewModel.DataNascimento,
                 Bolsa = alunoViewModel.Bolsa,
                 Desconto = alunoViewModel.Desconto,
-                GrupoId = alunoViewModel.GrupoId                
+                GrupoId = alunoViewModel.GrupoId
             };
 
             //var viewModel = new AlunoViewModel()
