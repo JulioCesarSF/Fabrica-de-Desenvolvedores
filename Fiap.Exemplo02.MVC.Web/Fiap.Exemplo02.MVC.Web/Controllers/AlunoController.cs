@@ -69,6 +69,17 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         //(int id) para receber o id do view
         public ActionResult Editar(int id)
         {
+            var aluno = _unit.AlunoRepository.BuscarPorId(id);
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                Nome = aluno.Nome,
+                Bolsa = aluno.Bolsa,
+                DataNascimento = aluno.DataNascimento,
+                Desconto = aluno.Desconto,
+                Id = aluno.Id,
+                GrupoId = aluno.GrupoId
+            };
             //buscar o objeto (aluno) no banco
             // var context = new PortalContext();
             // var aluno = context.Aluno.Find(id);
@@ -141,6 +152,16 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Excluir(int id)
         {
+            var aluno = _unit.AlunoRepository.BuscarPorId(id);
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                Nome = aluno.Nome,
+                Bolsa = aluno.Bolsa,
+                DataNascimento = aluno.DataNascimento,
+                Desconto = aluno.Desconto,
+                Id = aluno.Id
+            };
             //var context = new PortalContext();
             //Aluno a = context.Aluno.Find(int.Parse(id));
             //context.Aluno.Remove(a);
@@ -148,12 +169,15 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             _unit.Save();
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Aluno exterminado!";
-            return RedirectToAction("Listar");
+            return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult Editar(Aluno aluno)
         {
+            //ADICIONAR O VIEWMODEL
+
+
             /*
             context.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
