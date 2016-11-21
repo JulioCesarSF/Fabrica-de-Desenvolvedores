@@ -1,5 +1,6 @@
 ﻿using Fiap.Exemplo02.MVC.Web.Models;
 using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
+using Fiap.Exemplo02.MVC.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,24 +14,27 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         private UnitOfWork _unit = new UnitOfWork();
 
         [HttpGet]
-        public ActionResult Cadastrar()
+        public ActionResult Cadastrar(ProfessorViewModel professorViewModel)
         {
-            return View();
+            return View(professorViewModel);
         }
 
         [HttpPost]
         public ActionResult Cadastrar(Professor professor)
         {
-            var con = new PortalContext();
-            con.Professor.Add(professor);
+            //var con = new PortalContext();
+            //con.Professor.Add(professor);
 
             _unit.ProfessorRepository.Cadastrar(professor);
             _unit.Save();
 
-            TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Cadastro efetuado!";
+            var viewModel = new ProfessorViewModel()
+            {
+                Mensagem = "Professor cadastrado!",
+                TipoMensagem = "alert alert-success"
+            };            
 
-            return View();
+            return View(viewModel);
         }
 
         [HttpGet]
