@@ -3,6 +3,7 @@ using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
 using Fiap.Exemplo02.MVC.Web.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,8 +26,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                 ListaGrupo = ListarGrupos(),
                 Mensagem = msg,
                 // TipoMensagem = tipoMsg
-
-
             };
 
             return View(viewModel);
@@ -41,8 +40,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Listar(AlunoViewModel vM)
         {
-
-
             //include -> busca o relacionamento (preenche o grupo que o aluno possui), faz o join
             // IList<Aluno> _lista = new PortalContext().Aluno.Include("Grupo").ToList();
 
@@ -54,7 +51,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                 ListaGrupo = ListarGrupos()
 
             };
-
 
             return View(viewModel);
         }
@@ -68,8 +64,9 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         //(int id) para receber o id do view
         public ActionResult Editar(int id)
-        {
+        {            
             var aluno = _unit.AlunoRepository.BuscarPorId(id);
+            Debug.WriteLine("Nome do aluno {0}", aluno.Nome);
             var viewModel = new AlunoViewModel()
             {
                 ListaGrupo = ListarGrupos(),
@@ -84,7 +81,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             // var context = new PortalContext();
             // var aluno = context.Aluno.Find(id);
             //manda o aluno para a view
-            return View(_unit.AlunoRepository.BuscarPorId(id));
+            
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -159,24 +157,24 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Excluir(int id)
         {
-            var aluno = _unit.AlunoRepository.BuscarPorId(id);
+            //var aluno = _unit.AlunoRepository.BuscarPorId(id);
+            _unit.AlunoRepository.Remover(id);
+            _unit.Save();
             var viewModel = new AlunoViewModel()
             {
                 ListaGrupo = ListarGrupos(),
-                Nome = aluno.Nome,
-                Bolsa = aluno.Bolsa,
-                DataNascimento = aluno.DataNascimento,
-                Desconto = aluno.Desconto,
-                Id = aluno.Id
+                Alunos = CarregarAlunos(),
+                Mensagem = "Aluno deletado com sucesso!",
+                TipoMensagem = "alert alert-success"
             };
             //var context = new PortalContext();
             //Aluno a = context.Aluno.Find(int.Parse(id));
             //context.Aluno.Remove(a);
-            _unit.AlunoRepository.Remover(id);
-            _unit.Save();
-            TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Aluno exterminado!";
-            return View(viewModel);
+            //_unit.AlunoRepository.Remover(id);
+            //_unit.Save();
+            //TempData["tipoMensagem"] = "alert alert-success";
+            //TempData["mensagem"] = "Aluno exterminado!";
+            return View("Listar", viewModel);
         }
 
         [HttpPost]
