@@ -31,12 +31,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             return View(viewModel);
         }
 
-        private SelectList ListarGrupos()
-        {
-
-            return new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
-        }
-
         [HttpGet]
         public ActionResult Listar(AlunoViewModel vM)
         {
@@ -54,12 +48,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
             return View(viewModel);
         }
-
-        private ICollection<Aluno> CarregarAlunos()
-        {
-            return _unit.AlunoRepository.Listar();
-        }
-
 
         [HttpGet]
         //(int id) para receber o id do view
@@ -135,13 +123,6 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                     GrupoId = alunoViewModel.GrupoId
                 };
 
-                //var viewModel = new AlunoViewModel()
-                //{
-                //    TipoMensagem = "alert alert-success",
-                //    Mensagem = "Cadastrado com sucesso!",
-                //    ListaGrupo = ListarGrupos()
-                //};
-
                 _unit.AlunoRepository.Cadastrar(aluno);
                 _unit.Save();
 
@@ -152,6 +133,13 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                 alunoViewModel.ListaGrupo = ListarGrupos();
                 return View(alunoViewModel);
             }
+
+            //var viewModel = new AlunoViewModel()
+            //{
+            //    TipoMensagem = "alert alert-success",
+            //    Mensagem = "Cadastrado com sucesso!",
+            //    ListaGrupo = ListarGrupos()
+            //};
         }
 
         [HttpPost]
@@ -211,6 +199,17 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         {
             //enviar para a tela os grupos para o "select"
             ViewBag.grupos = new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
+        }
+
+        private ICollection<Aluno> CarregarAlunos()
+        {
+            return _unit.AlunoRepository.Listar();
+        }
+
+        private SelectList ListarGrupos()
+        {
+
+            return new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
         }
         #endregion
 
