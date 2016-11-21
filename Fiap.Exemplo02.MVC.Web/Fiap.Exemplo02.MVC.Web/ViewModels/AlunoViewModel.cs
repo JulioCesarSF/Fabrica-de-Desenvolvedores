@@ -22,7 +22,7 @@ namespace Fiap.Exemplo02.MVC.Web.ViewModels
         [StringLength(100)]
         [Required(ErrorMessage ="Nome é obrigatório")]
         public string Nome { get; set; }
-        [Display(Name="Data de Nascimento")]
+        [Display(Name="Data de Nascimento")]            
         public DateTime DataNascimento { get; set; }
         public Nullable<double> Desconto { get; set; }
         public bool Bolsa { get; set; }

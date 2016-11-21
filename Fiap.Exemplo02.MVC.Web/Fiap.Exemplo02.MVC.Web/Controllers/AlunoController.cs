@@ -19,13 +19,14 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         #region GET
         // GET: Aluno
         [HttpGet]
-        public ActionResult Cadastrar(string msg)
+        public ActionResult Cadastrar(string msg, string tipoMsg)
         {
             var viewModel = new AlunoViewModel()
             {
                 ListaGrupo = ListarGrupos(),
+                DataNascimento = DateTime.Today,
                 Mensagem = msg,
-                // TipoMensagem = tipoMsg
+                TipoMensagem = tipoMsg
             };
 
             return View(viewModel);
@@ -126,7 +127,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                 _unit.AlunoRepository.Cadastrar(aluno);
                 _unit.Save();
 
-                return RedirectToAction("Cadastrar", new { msg = "Aluno Cadastrado" });
+                return RedirectToAction("Cadastrar", new { msg = "Aluno Cadastrado", tipoMsg = "alert alert-success" });
             }
             else
             {
