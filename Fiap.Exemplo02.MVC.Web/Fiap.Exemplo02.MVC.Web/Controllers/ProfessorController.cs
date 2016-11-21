@@ -14,27 +14,39 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         private UnitOfWork _unit = new UnitOfWork();
 
         [HttpGet]
-        public ActionResult Cadastrar(ProfessorViewModel professorViewModel)
+        public ActionResult Cadastrar(string msg, string tipoMsg)
         {
-            return View(professorViewModel);
+            var viewModel = new ProfessorViewModel()
+            {
+                Mensagem = msg,
+                TipoMensagem = tipoMsg
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(Professor professor)
+        public ActionResult Cadastrar(ProfessorViewModel profViewModel)
         {
             //var con = new PortalContext();
             //con.Professor.Add(professor);
 
-            _unit.ProfessorRepository.Cadastrar(professor);
-            _unit.Save();
-
-            var viewModel = new ProfessorViewModel()
+            if (ModelState.IsValid)
             {
-                Mensagem = "Professor cadastrado!",
-                TipoMensagem = "alert alert-success"
-            };            
+                var prof = new Professor()
+                {
+                    Nome = profViewModel.Nome,
+                    Salario = profViewModel.Salario
+                    
+                };
+                _unit.ProfessorRepository.Cadastrar(prof);
+                _unit.Save();               
 
-            return View(viewModel);
+                return RedirectToAction("Cadastrar", new { msg = "Professor cadastrado!", tipoMsg = "alert alert-success" });
+            }else
+            {
+                return View();
+            }
+            
         }
 
         [HttpGet]
