@@ -24,6 +24,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var viewModel = new AlunoViewModel()
             {
                 ListaGrupo = ListarGrupos(),
+                ListaProf = ListarProfs(),
                 DataNascimento = DateTime.Today,
                 Mensagem = msg,
                 TipoMensagem = tipoMsg
@@ -124,7 +125,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                     DataNascimento = alunoViewModel.DataNascimento,
                     Bolsa = alunoViewModel.Bolsa,
                     Desconto = alunoViewModel.Desconto,
-                    GrupoId = alunoViewModel.GrupoId
+                    GrupoId = alunoViewModel.GrupoId,
+                    //Professor = alunoViewModel.Professores
                 };
 
                 _unit.AlunoRepository.Cadastrar(aluno);
@@ -216,6 +218,16 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         #endregion
 
         #region PRIVATE
+
+        private ICollection<Professor> ListarProfessores()
+        {
+            return _unit.ProfessorRepository.Listar();
+        }
+
+        private SelectList ListarProfs()
+        {
+            return new SelectList(_unit.ProfessorRepository.Listar(), "Id", "Nome");
+        }
 
         private void CarregarComboGrupos()
         {

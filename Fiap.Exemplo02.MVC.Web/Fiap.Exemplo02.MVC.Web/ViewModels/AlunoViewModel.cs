@@ -11,7 +11,8 @@ namespace Fiap.Exemplo02.MVC.Web.ViewModels
 {
     public class AlunoViewModel
     {
-        //opções do select
+        //opções do select        
+        public SelectList ListaProf { get; set; }
         public SelectList ListaGrupo { get; set; }
 
         public string Mensagem { get; set; }
@@ -27,11 +28,12 @@ namespace Fiap.Exemplo02.MVC.Web.ViewModels
         public Nullable<double> Desconto { get; set; }
         public bool Bolsa { get; set; }
         [Display(Name = "Grupo")]
-        public int GrupoId { get; set; }
+        public int GrupoId { get; set; }        
 
         #region Lista properties
 
         public ICollection<Aluno> Alunos { get; set; }
+        public IList<Professor> Professores { get; set; }
         public int? idBusca { get; set; }
         public string NomeBusca { get; set; }
         #endregion

@@ -1,4 +1,5 @@
 ﻿using Fiap.Exemplo02.MVC.Web.Models;
+using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 {
     public class ProfessorController : Controller
     {
+        private UnitOfWork _unit = new UnitOfWork();
+
         [HttpGet]
         public ActionResult Cadastrar()
         {
@@ -20,6 +23,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         {
             var con = new PortalContext();
             con.Professor.Add(professor);
+
+            _unit.ProfessorRepository.Cadastrar(professor);
+            _unit.Save();
+
             TempData["tipoMensagem"] = "alert alert-success";
             TempData["mensagem"] = "Cadastro efetuado!";
 
@@ -29,9 +36,9 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Listar()
         {
-            var con = new PortalContext();
-            var _lista = con.Professor.ToList();
-            return View(_lista);
+            //var con = new PortalContext();
+            //var _lista = con.Professor.ToList();
+            return View(_unit.ProfessorRepository.Listar());
         }
     }
 }
