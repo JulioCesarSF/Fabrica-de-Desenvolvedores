@@ -174,25 +174,43 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         {
             //ADICIONAR O VIEWMODEL
 
+            if (ModelState.IsValid)
+            {
+                _unit.AlunoRepository.Alterar(aluno);
+                _unit.Save();
+
+                var viewModel = new AlunoViewModel()
+                {
+                    ListaGrupo = ListarGrupos(),
+                    Alunos = CarregarAlunos(),
+                    Mensagem = "Aluno Atualizado com Sucesso!",
+                    TipoMensagem = "alert alert-success"
+                };
+
+                return View("Listar", viewModel);
+            }else
+            {
+                return RedirectToAction("Editar", aluno.Id);
+            }
 
             /*
             context.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
             */
 
-            _unit.AlunoRepository.Alterar(aluno);
+            //_unit.AlunoRepository.Alterar(aluno);
 
-            //var context = new PortalContext();
-            //var a = context.Aluno.Find(aluno.Id);
-            //a.Nome = aluno.Nome;
-            //a.DataNascimento = aluno.DataNascimento;
-            //a.Bolsa = aluno.Bolsa;
-            //a.Desconto = aluno.Desconto;
-            _unit.Save();
+            ////var context = new PortalContext();
+            ////var a = context.Aluno.Find(aluno.Id);
+            ////a.Nome = aluno.Nome;
+            ////a.DataNascimento = aluno.DataNascimento;
+            ////a.Bolsa = aluno.Bolsa;
+            ////a.Desconto = aluno.Desconto;
+            //_unit.Save();
 
-            TempData["tipoMensagem"] = "alert alert-success";
-            TempData["mensagem"] = "Aluno atualizado";
-            return RedirectToAction("Listar");
+            //TempData["tipoMensagem"] = "alert alert-success";
+            //TempData["mensagem"] = "Aluno atualizado";
+            //return RedirectToAction("Listar");
         }
 
         #endregion
