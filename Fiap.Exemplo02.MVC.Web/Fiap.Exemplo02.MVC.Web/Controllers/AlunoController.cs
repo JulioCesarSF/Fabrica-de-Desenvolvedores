@@ -53,9 +53,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         //(int id) para receber o id do view
         public ActionResult Editar(int id)
-        {            
+        {
+           //Debug.WriteLine("ID do aluno {0}", id);
             var aluno = _unit.AlunoRepository.BuscarPorId(id);
-            Debug.WriteLine("Nome do aluno {0}", aluno.Nome);
+           //Debug.WriteLine(aluno.Nome);
             var viewModel = new AlunoViewModel()
             {
                 ListaGrupo = ListarGrupos(),
@@ -70,6 +71,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             // var context = new PortalContext();
             // var aluno = context.Aluno.Find(id);
             //manda o aluno para a view
+
+            Debug.WriteLine(viewModel.DataNascimento);
             
             return View(viewModel);
         }

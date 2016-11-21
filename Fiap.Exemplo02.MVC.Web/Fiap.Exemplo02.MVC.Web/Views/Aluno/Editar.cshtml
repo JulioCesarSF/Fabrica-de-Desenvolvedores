@@ -21,31 +21,38 @@
         {
             <div class="form-group">
                 @Html.LabelFor(a => a.Nome)
-                @Html.TextBoxFor(Model.Nome, new { @class = "form-control" })
+                @Html.TextBoxFor(a=>a.Nome, new { @class = "form-control", @Value = Model.Nome })
                 @Html.ValidationMessageFor(a=>a.Nome)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a => a.DataNascimento)
-                @Html.TextBoxFor(Model.DataNascimento, new { @class = "form-control" })
+                @*@Html.TextBoxFor(Model.DataNascimento, new { @class = "form-control" })*@
+                @Html.TextBoxFor(a => a.DataNascimento, "{0:yyyy-MM-dd}",
+               
+               new {
+                   @class = "form-control",
+                   @Value = Model.DataNascimento.Date.ToString("yyyy-MM-dd"),
+                   type = "date" })
+                
                 @Html.ValidationMessageFor(a=>a.DataNascimento)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a => a.Desconto)
-                @Html.TextBoxFor(Model.Desconto, new { @class = "form-control" })
+                @Html.TextBoxFor(a=>a.Desconto, new { @class = "form-control", @Value=Model.Desconto })
                 @Html.ValidationMessageFor(a=>a.Desconto)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a => a.Bolsa)
-                @Html.CheckBoxFor(Model.Bolsa)
+                @Html.CheckBoxFor(a=>a.Bolsa, new { @checked = (Model.Bolsa) ? "checked" : "unchecked" })
                 @Html.ValidationMessageFor(a=>a.Bolsa)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.GrupoId)
-                @Html.DropDownListFor(a=>a.GrupoId, Model.ListaGrupo, new { @class = "form-control" })
+                @Html.DropDownListFor(a=>a.GrupoId, Model.ListaGrupo, new { @class = "form-control", @Value=Model.GrupoId })
                 @Html.ValidationMessageFor(a=>a.GrupoId)
             </div>
 
