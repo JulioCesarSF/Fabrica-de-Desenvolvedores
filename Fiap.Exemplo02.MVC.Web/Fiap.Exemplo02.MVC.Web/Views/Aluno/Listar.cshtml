@@ -62,8 +62,7 @@
                         <td>@item.Desconto</td>
                         <td>@(item.Bolsa?"Sim":"Não")</td>
                         <td>@item.Grupo.Nome</td>
-                        <td> 
-
+                        <td id="acoes"> 
                             <button onclick="IDID.value=@item.Id" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
                                 Excluir
                             </button>
@@ -109,6 +108,15 @@
         $("#idBusca").change(function () {
             //selecione o form e faz o submit
             $("#formBusca").submit();
+        });
+
+        //esconder os botões de ações da tabela
+        $("td > button, td > a").css("visibility", "hidden");
+        //quando o mouse apssar por cima da linha, exibe os botes
+        $("tr").hover(function () {
+            $(this).find("button, a").css("visibility", "visible");
+        }, function () {
+            $(this).find("button, a").css("visibility", "hidden");
         });
     });
 </script>

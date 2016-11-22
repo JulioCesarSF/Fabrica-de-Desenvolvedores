@@ -1369,7 +1369,7 @@ $.extend( $.validator, {
 
 		// http://jqueryvalidation.org/date-method/
 		date: function( value, element ) { // !/^\d\d?\/\d\d?\/\d\d\d\d$/.test(value);
-			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+		    return this.optional(element) || !/^\d\d?\/\d\d?\/\d\d\d\d$/.test(value);//!/Invalid|NaN/.test( new Date( value ).toString() );
 		},
 
 		// http://jqueryvalidation.org/dateISO-method/

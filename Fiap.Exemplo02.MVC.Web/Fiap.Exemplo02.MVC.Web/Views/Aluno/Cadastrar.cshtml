@@ -30,19 +30,14 @@
                 @Html.LabelFor(a => a.DataNascimento)
                 @*@Html.TextBoxFor(a => a.DataNascimento, new { @class = "form-control", @Value = Model.DataNascimento.ToString("dd/MM/yyyy") })*@
                 @*@Html.EditorFor(a => a.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.TextBoxFor(a => a.DataNascimento, "{0:d MMM yyyy}", new { @class = "form-control", type="date" })
+                @Html.TextBoxFor(a => a.DataNascimento, "{0:yyyy-MM-dd}", new { @class = "form-control", type="date" })
+                @*@Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", new { @class = "form-control" })*@
                 @*0:dd/MM/yyyy*@
                
                 @Html.ValidationMessageFor(a => a.DataNascimento)                               
 
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(a => a.Desconto)
-                @Html.TextBoxFor(a=>a.Desconto, new { @class = "form-control" })
-                @Html.ValidationMessageFor(a => a.Desconto)
-            </div>
-
+           
             <div class="form-group">
                 @Html.LabelFor(a=>a.GrupoId)
                 @Html.DropDownListFor(a=>a.GrupoId, 
@@ -64,6 +59,13 @@
                 @Html.ValidationMessageFor(a => a.Bolsa)
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(a => a.Desconto)
+                @Html.TextBoxFor(a => a.Desconto, new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.Desconto)
+            </div>
+
+
             @Juliao.Submit("Salvar")
 
             @*@Html.EditorForModel(new { @class="form-control"})
@@ -71,3 +73,27 @@
         }
     </div>
 </div>
+
+@section scripts{
+    <script>
+        $().ready(function () {
+
+            $("#DataNascimento").datepicker();
+
+            if ($("#Bola").attr("checked") == "checked") {
+                $("#Desconto").parent().css("display", "block");
+            } else {
+                $("#Desconto").parent().css("display", "none");
+            }
+           // $("#Desconto").parent().slideToggle();
+            //Quando clicar no checkbox
+            $("#Bolsa").click(function () {
+                //Esconde ou exibe 
+                $("#Desconto").parent().slideToggle();
+                $("#Desconto").focus();
+            });
+
+           
+        });
+    </script>       
+}
