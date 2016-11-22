@@ -87,14 +87,14 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var lista = _unit.AlunoRepository.BuscarPor(aa => 
                         aa.Nome.Contains(nomeBusca) && (aa.GrupoId == idBusca || idBusca == null));
 
-            var viewModel = new AlunoViewModel()
-            {
-                Alunos = lista,
-                ListaGrupo = ListarGrupos()
-            };
+            //var viewModel = new AlunoViewModel()
+            //{
+            //    Alunos = lista,
+            //    ListaGrupo = ListarGrupos()
+            //};
 
-           // viewModel.Alunos = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
-            
+            // viewModel.Alunos = _unit.AlunoRepository.BuscarPor(aa => aa.Nome.Contains(nomeBusca));
+
 
             //ICollection<Aluno> l;
             //if (idGrupo == null)
@@ -107,8 +107,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //}
 
             //viewModel.ListaGrupo = ListarGrupos();
-           
-            return View("Listar", viewModel);
+
+            return PartialView("_tabela", lista);
         }
         #endregion
 

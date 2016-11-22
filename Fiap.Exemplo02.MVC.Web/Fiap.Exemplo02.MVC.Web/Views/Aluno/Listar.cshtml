@@ -14,7 +14,9 @@
 </div>
 
 <div class="row">
-@using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get, new { id="formBusca" }))
+@using (Ajax.BeginForm("Buscar", null, 
+    new AjaxOptions { HttpMethod="get", UpdateTargetId="tabela", InsertionMode = InsertionMode.Replace } , 
+    new { id="formBusca" }))
 {
 
         <div class="col-md-3">
@@ -24,8 +26,6 @@
         <div class="col-md-3">
             @Html.DropDownListFor(a=>a.idBusca, Model.ListaGrupo, 
                                     "Todos os Grupos", new { @class ="form-control"})
-
-
         </div>
 
         <div class="col-md-3">
@@ -52,26 +52,8 @@
                     <th>Ação</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in Model.Alunos)
-            {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Nome</td>
-                        <td>@item.DataNascimento.ToShortDateString()</td>
-                        <td>@item.Desconto</td>
-                        <td>@(item.Bolsa?"Sim":"Não")</td>
-                        <td>@item.Grupo.Nome</td>
-                        <td id="acoes"> 
-                            <button onclick="IDID.value=@item.Id" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
-                                Excluir
-                            </button>
-                            @Html.ActionLink("Editar", "Editar", new { id = @item.Id }, new { @class = "btn btn-primary btn-sm" })
-                           
-
-                        </td>
-                    </tr>
-                }
+            <tbody id="tabela">               
+                @Html.Partial("_tabela", Model.Alunos)
             </tbody>
         </table>
     </div>
