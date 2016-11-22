@@ -81,7 +81,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Buscar(String nomeBusca, int? idBusca) //paramatro nao obrigatorio ?
         {
-            var context = new PortalContext();
+           // var context = new PortalContext();
             //var a = context.Aluno.Where(aa => aa.Nome.Contains(nomeBusca)).ToList();
 
             var lista = _unit.AlunoRepository.BuscarPor(aa => 
