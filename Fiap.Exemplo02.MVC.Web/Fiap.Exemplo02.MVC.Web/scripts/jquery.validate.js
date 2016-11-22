@@ -1368,7 +1368,7 @@ $.extend( $.validator, {
 		},
 
 		// http://jqueryvalidation.org/date-method/
-		date: function( value, element ) {
+		date: function( value, element ) { // !/^\d\d?\/\d\d?\/\d\d\d\d$/.test(value);
 			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
 		},
 

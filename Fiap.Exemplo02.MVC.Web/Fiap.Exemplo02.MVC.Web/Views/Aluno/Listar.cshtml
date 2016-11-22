@@ -14,9 +14,9 @@
 </div>
 
 <div class="row">
-@using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get))
-{       
-        
+@using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get, new { id="formBusca" }))
+{
+
         <div class="col-md-3">
             @Html.TextBoxFor(a=>a.NomeBusca, new { placeholder = "Digite um Nome", @class = "form-control" })
         </div>
@@ -24,6 +24,8 @@
         <div class="col-md-3">
             @Html.DropDownListFor(a=>a.idBusca, Model.ListaGrupo, 
                                     "Todos os Grupos", new { @class ="form-control"})
+
+
         </div>
 
         <div class="col-md-3">
@@ -99,3 +101,16 @@
         </div>
     </div>
 </div>
+
+@section scripts{ 
+<script>
+    $().ready(function () {
+        /*Selecionar o select da busca de grupos*/
+        $("#idBusca").change(function () {
+            //selecione o form e faz o submit
+            $("#formBusca").submit();
+        });
+    });
+</script>
+}
+
