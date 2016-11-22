@@ -85,13 +85,7 @@
 
 @section scripts{ 
 <script>
-    $().ready(function () {
-        /*Selecionar o select da busca de grupos*/
-        $("#idBusca").change(function () {
-            //selecione o form e faz o submit
-            $("#formBusca").submit();
-        });
-
+    function someBotao(){
         //esconder os botões de ações da tabela
         $("td > button, td > a").css("visibility", "hidden");
         //quando o mouse apssar por cima da linha, exibe os botes
@@ -100,7 +94,20 @@
         }, function () {
             $(this).find("button, a").css("visibility", "hidden");
         });
+
+    }
+    $().ready(function () {
+        someBotao();
+
+        /*Selecionar o select da busca de grupos*/
+        $("#idBusca").change(function () {
+            //selecione o form e faz o submit
+            $("#formBusca").submit();
+        });
+
+          
     });
+    
 </script>
 }
 
