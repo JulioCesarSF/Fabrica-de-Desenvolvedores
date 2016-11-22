@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Aluno]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)
