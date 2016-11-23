@@ -11,9 +11,12 @@
     <div class="col-md-12">
         @using (Html.BeginForm())
         {
-            <div class="form-group">
+            <div class="form-group has-feedback">
                 @Html.LabelFor(g=>g.Nome)
-                @Html.TextBoxFor(g=>g.Nome, new { @class = "form-control" })                
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(g=>g.Nome, new { @class = "input-validation-error form-control" })
+                </div>                
             </div>
 
             <div class="form-group">
@@ -28,4 +31,35 @@
         }
     </div>
 </div>
+
+@section scripts{
+    <script>
+        $().ready(function () {
+            $("#Nome").blur(function () {
+                $.ajax({
+                    url: '@Url.Action("BuscarNome", "Grupo")',
+                    type: "get",
+                    data: { nome: $("#Nome").val() },
+                    success: function (data) {
+                        if (data.ok) {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                            $("#Nome").focus();
+                            //console.log("achou nome");
+                        } else {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                            //console.log("nao achou nome");
+                        }
+                    },
+                    error: function () {
+                        console.log("erro");
+                    }
+                });
+            });
+        });
+    </script>    
+}
 

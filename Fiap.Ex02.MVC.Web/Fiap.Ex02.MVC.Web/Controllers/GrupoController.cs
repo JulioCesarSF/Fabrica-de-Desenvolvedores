@@ -28,6 +28,13 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public ActionResult BuscarNome(string nome)
+        {
+            var grupo = _unit.GrupoRepository.BuscarPor(g => g.Nome == nome);
+            return Json(new { ok = grupo.Any() }, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region POSTS
