@@ -13,10 +13,10 @@
     <div class="col-md-12">
         @using (Html.BeginForm())
         {
-            <div class="form-group">
+            <div class="form-group has-feedback">                
                 @Html.LabelFor(a => a.Nome)
                 @Html.TextBoxFor(a => a.Nome, new { @class = "input-validation-error form-control" })
-                @Html.ValidationMessageFor(a=>a.Nome)
+                @Html.ValidationMessageFor(a => a.Nome)                
             </div>
             
             <div class="form-group">
@@ -66,7 +66,35 @@
             $("#Bolsa").click(function () {
                 $("#Desconto").parent().slideToggle();
                 $("#Desconto").focus();
-            })
+            });           
+
+            //buscar se nome já existe com ajax
+            $("#Nome").blur(function () {                
+                $.ajax({
+                    url: '@Url.Action("BuscarNome", "Aluno")',
+                    type: "get",
+                    data: {nome: $("#Nome").val() },
+                    success: function(data){
+                        if(data.ok){
+                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                            $('.input-validation-error').parents('.form-group').find('i').remove();
+                            $('.input-validation-error').parents('.form-group').append("<i class=\"glyphicon glyphicon-remove col-sm-pull-2 form-control-feedback\"></i>");
+                            //console.log("achou nome");
+                        }else{                            
+                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                            $('.input-validation-error').parents('.form-group').find('i').remove();
+                            $('.input-validation-error').parents('.form-group').append("<i class=\"glyphicon glyphicon-ok col-sm-pull-2 form-control-feedback\"></i>");
+                            //console.log("nao achou nome");
+                        }
+                    },
+                    error: function(){
+                        $('.input-validation-error').parents('.form-group').addClass('has-error');
+                        $('.input-validation-error').parents('.form-group').find('i').remove();
+                        $('.input-validation-error').parents('.form-group').append("<i class=\"glyphicon glyphicon-remove col-sm-pull-2 form-control-feedback\"></i>");
+                    }
+                });
+            });           
+            
 
             //validações
             //$('.input-validation-error').parents('.form-group').addClass('has-error');

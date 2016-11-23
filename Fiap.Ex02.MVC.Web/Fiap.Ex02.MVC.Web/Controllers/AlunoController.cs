@@ -62,10 +62,16 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             };
             return View(viewModel);
         }
+        [HttpGet]
+        public ActionResult BuscarNome(string nome)
+        {
+            var aluno = _unit.AlunoRepository.BuscarPor(a => a.Nome == nome);
+            return Json(new { ok = aluno.Any() }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region POSTS
-        //TODO: adicionar validações
+
         [HttpPost]
         public ActionResult Cadastrar(AlunoViewModel viewModel)
         {

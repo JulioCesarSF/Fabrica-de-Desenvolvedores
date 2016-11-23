@@ -26,7 +26,7 @@ namespace Fiap.Ex02.MVC.Web.Repositories
         public ICollection<T> BuscarPor(Expression<Func<T, bool>> filtro)
         {
             return _dbset.Where(filtro).ToList();
-        }
+        }       
 
         public T BuscarPorId(int id)
         {
