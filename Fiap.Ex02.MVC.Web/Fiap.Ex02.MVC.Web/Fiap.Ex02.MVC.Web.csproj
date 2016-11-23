@@ -267,6 +267,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Grupo\Cadastrar.cshtml" />
+    <Content Include="Views\Aluno\Listar.cshtml" />
+    <Content Include="Views\Aluno\_tabela.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

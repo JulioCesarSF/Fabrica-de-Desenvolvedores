@@ -1,0 +1,28 @@
+﻿@model Fiap.Ex02.MVC.Web.ViewModels.AlunoViewModel
+@{
+    ViewBag.Title = "Listar";
+}
+
+@HelperLayout.Titulo("Lista de Aluno")
+
+@HelperLayout.Mensagem(Model.Mensagem, Model.TipoMensagem)
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Bolsa</th>
+                    <th>Desconto</th>
+                    <th>Grupo</th>
+                </tr>
+            </thead>
+            <tbody id="tabela">
+                @Html.Partial("_tabela", Model.ListaAluno)
+            </tbody>
+        </table>
+    </div>
+</div>
+

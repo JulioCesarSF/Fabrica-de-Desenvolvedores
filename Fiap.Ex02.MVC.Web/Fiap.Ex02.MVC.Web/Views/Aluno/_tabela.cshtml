@@ -1,0 +1,16 @@
+﻿@model List<Fiap.Ex02.MVC.Web.Models.Aluno>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Nome</td>
+        <td>@item.DataNascimento.ToShortDateString()</td>
+        <td>@item.Bolsa</td>
+        <td>@item.Desconto</td>
+        <td>@item.Grupo.Nome</td>
+    </tr>
+}
+
+@if (Request.IsAjaxRequest())
+{
+
+}
