@@ -282,6 +282,7 @@
     <Content Include="Views\Grupo\Listar.cshtml" />
     <Content Include="Views\Grupo\_tabela.cshtml" />
     <Content Include="Views\Grupo\Editar.cshtml" />
+    <Content Include="Views\Projeto\Cadastrar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -291,7 +292,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Projeto\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -21,12 +21,19 @@ namespace Fiap.Ex02.MVC.Web.ViewModels
         [Required]
         [StringLength(150)]
         public string Nome { get; set; }
+        [Display(Name = "Descrição do Projeto")]
+        [Required]
+        public string Descricao { get; set; }
+        [Display(Name = "Entregue?")]
+        [Required]
+        public bool Entregue { get; set; }
         [Display(Name = "Data de Início")]
         [Required]
         public DateTime DataInicio { get; set; }
-        [Display(Name = "Data de Término")]
+        [Display(Name = "Data de Término")]        
+        public Nullable<DateTime> DataTermino { get; set; }
+        [Display(Name = "Grupo")]
         [Required]
-        public DateTime DataTermino { get; set; }
         public int GrupoId { get; set; }
 
         #endregion

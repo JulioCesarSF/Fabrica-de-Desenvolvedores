@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Projeto]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Id] INT NOT NULL PRIMARY KEY, 
     [Nome] NVARCHAR(150) NOT NULL, 
     [Descricao] TEXT NOT NULL, 
     [DataInicio] DATETIME2 NOT NULL, 

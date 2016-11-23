@@ -24,6 +24,8 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             {
                 Mensagem = mensagem,
                 TipoMensagem = tipoMensagem,
+                DataInicio = DateTime.Now,
+                DataTermino = DateTime.Now,
                 Grupos = ListarGrupos()
             };
             return View(viewModel);
@@ -40,9 +42,11 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             {
                 var projeto = new Projeto()
                 {
+                    Id = viewModel.GrupoId,
                     Nome = viewModel.Nome,
+                    Descricao = viewModel.Descricao,
                     DataInicio = viewModel.DataInicio,
-                    DataTermino = viewModel.DataTermino,
+                    DataTermino = (viewModel.DataTermino.ToString() == null) ? null : viewModel.DataTermino,
                     Grupo = _unit.GrupoRepository.BuscarPorId(viewModel.GrupoId)
                 };
 
