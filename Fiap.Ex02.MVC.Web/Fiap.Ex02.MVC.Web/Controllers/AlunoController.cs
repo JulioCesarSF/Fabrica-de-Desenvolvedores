@@ -39,6 +39,13 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             };
             return View(alunoViewModel);
         }
+
+        public ActionResult Buscar(string nomeBusca, int? idBusca)
+        {
+            var lista = _unit.AlunoRepository.BuscarPor(
+                a=>a.Nome.Contains(nomeBusca) && (a.GrupoId == idBusca || idBusca == null));
+            return PartialView("_tabela", lista);
+        }
         #endregion
 
         #region POSTS
