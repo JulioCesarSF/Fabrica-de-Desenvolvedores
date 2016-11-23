@@ -69,19 +69,27 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(AlunoViewModel viewModel)
         {
-            var aluno = new Aluno()
+            if (ModelState.IsValid)
             {
-                Nome = viewModel.Nome,
-                DataNascimento = viewModel.DataNascimento,
-                Bolsa = viewModel.Bolsa,
-                Desconto = viewModel.Desconto,
-                GrupoId = viewModel.GrupoId
-            };
+                var aluno = new Aluno()
+                {
+                    Nome = viewModel.Nome,
+                    DataNascimento = viewModel.DataNascimento,
+                    Bolsa = viewModel.Bolsa,
+                    Desconto = viewModel.Desconto,
+                    GrupoId = viewModel.GrupoId
+                };
 
-            _unit.AlunoRepository.Cadastrar(aluno);
-            _unit.Save();
-            return RedirectToAction("Cadastrar", 
-                new { mensagem = "Cadastro realizado!", tipoMensagem = "alert alert-success" });
+                _unit.AlunoRepository.Cadastrar(aluno);
+                _unit.Save();
+                return RedirectToAction("Cadastrar",
+                    new { mensagem = "Cadastro realizado!", tipoMensagem = "alert alert-success" });
+            }else
+            {
+                viewModel.ListaGrupo = ListarGrupos();
+                return View(viewModel);
+            }
+            
         }
         [HttpPost]
         public ActionResult Excluir(int id)
