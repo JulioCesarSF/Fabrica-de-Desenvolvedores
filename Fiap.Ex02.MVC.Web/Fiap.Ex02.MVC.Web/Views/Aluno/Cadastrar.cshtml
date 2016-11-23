@@ -1,9 +1,44 @@
-﻿
+﻿@model Fiap.Ex02.MVC.Web.ViewModels.AlunoViewModel
 @{
     ViewBag.Title = "Cadastrar";
 }
 
 @HelperLayout.Titulo("Cadastrar Aluno")
 
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(a => a.Nome)
+                @Html.TextBoxFor(a => a.Nome, new { @class = "form-control" })
+            </div>
 
+            <div class="form-group">
+                @Html.LabelFor(a => a.DataNascimento)
+                @Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", new { @class="form-control"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a=>a.GrupoId)
+                @Html.DropDownListFor(a=>a.GrupoId, Model.ListaGrupo, "Selecione", new { @class="form-control"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a=>a.Bolsa)
+                @Html.CheckBoxFor(a=>a.Bolsa)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a=>a.Desconto)
+                @Html.TextBoxFor(a=>a.Desconto, new {@class="form-control" })
+            </div>
+
+            <div class="form-group">
+                @HelperForm.Submit("Salvar", "btn btn-success")
+                @HelperForm.Reset("Limpar", "btn btn-danger")                
+            </div>
+        }
+    </div>
+</div>
 
