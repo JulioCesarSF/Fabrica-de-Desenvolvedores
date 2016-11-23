@@ -41,15 +41,22 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(GrupoViewModel viewModel)
         {
-            var grupo = new Grupo()
+            if (ModelState.IsValid)
             {
-                Nome = viewModel.Nome,
-                Nota = viewModel.Nota
-            };
-            _unit.GrupoRepository.Cadastrar(grupo);
-            _unit.Save();
-            return RedirectToAction("Cadastrar", 
-                new { mensagem = "Cadastro Realizado!", tipoMensagem = "alert alert-success" });
+                var grupo = new Grupo()
+                {
+                    Nome = viewModel.Nome,
+                    Nota = viewModel.Nota
+                };
+                _unit.GrupoRepository.Cadastrar(grupo);
+                _unit.Save();
+                return RedirectToAction("Cadastrar",
+                    new { mensagem = "Cadastro Realizado!", tipoMensagem = "alert alert-success" });
+            }else
+            {
+                return View(viewModel);
+            }
+            
         }
         #endregion
     }
