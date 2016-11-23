@@ -29,7 +29,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             };
             return View(viewModel);
         }
-
+        [HttpGet]
         public ActionResult Listar(AlunoViewModel viewModel)
         {
             var alunoViewModel = new AlunoViewModel()
@@ -39,12 +39,28 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             };
             return View(alunoViewModel);
         }
-
+        [HttpGet]
         public ActionResult Buscar(string nomeBusca, int? idBusca)
         {
             var lista = _unit.AlunoRepository.BuscarPor(
                 a=>a.Nome.Contains(nomeBusca) && (a.GrupoId == idBusca || idBusca == null));
             return PartialView("_tabela", lista);
+        }
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            var aluno = _unit.AlunoRepository.BuscarPorId(id);
+            var viewModel = new AlunoViewModel()
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                DataNascimento = aluno.DataNascimento,
+                Bolsa = aluno.Bolsa,
+                Desconto = aluno.Desconto,
+                GrupoId = aluno.GrupoId,
+                ListaGrupo = ListarGrupos()
+            };
+            return View(viewModel);
         }
         #endregion
 
