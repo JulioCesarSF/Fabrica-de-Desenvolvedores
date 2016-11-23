@@ -4,8 +4,8 @@
     <tr>
         <td>@item.Nome</td>
         <td>@item.DataNascimento.ToShortDateString()</td>
-        <td>@item.Bolsa</td>
-        <td>@item.Desconto</td>
+        <td>@(item.Bolsa ? "Sim":"Não")</td>
+        <td>@(item.Bolsa ? @item.Desconto.ToString() + "%" : "-")</td>
         <td>@item.Grupo.Nome</td>
     </tr>
 }
