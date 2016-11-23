@@ -254,6 +254,7 @@
     <Compile Include="UnitsOfWork\UnitOfWork.cs" />
     <Compile Include="ViewModels\AlunoViewModel.cs" />
     <Compile Include="ViewModels\GrupoViewModel.cs" />
+    <Compile Include="ViewModels\ProjetoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
