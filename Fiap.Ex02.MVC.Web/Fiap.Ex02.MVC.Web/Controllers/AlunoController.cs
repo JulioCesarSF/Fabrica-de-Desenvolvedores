@@ -109,7 +109,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         public ActionResult Editar(Aluno aluno)
         {
             AlunoViewModel viewModel = null;
-            try
+            if (ModelState.IsValid)
             {
                 _unit.AlunoRepository.Alterar(aluno);
                 _unit.Save();
@@ -121,13 +121,12 @@ namespace Fiap.Ex02.MVC.Web.Controllers
                     ListaAluno = ListarAluno()
                 };
                 return View("Listar", viewModel);
-            }
-            catch (Exception e)
+            }else            
             {
                 viewModel = new AlunoViewModel()
                 {
-                    Mensagem = e.GetType().ToString(),
-                    TipoMensagem = "Erro ao atualizar",
+                    Mensagem = "Erro ao atualizar aluno.",
+                    TipoMensagem = "alert alert-danger",
                     Nome = aluno.Nome,
                     DataNascimento = aluno.DataNascimento,
                     Bolsa = aluno.Bolsa,

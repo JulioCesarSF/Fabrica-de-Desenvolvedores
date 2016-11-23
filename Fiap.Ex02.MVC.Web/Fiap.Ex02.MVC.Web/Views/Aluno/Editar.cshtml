@@ -7,6 +7,8 @@
 
 @HelperLayout.Mensagem(Model.Mensagem, Model.TipoMensagem)
 
+@Html.ValidationSummary()
+
 <div class="row">
     <div class="col-md-12">
         @using (Html.BeginForm())
@@ -16,7 +18,7 @@
                 @Html.TextBoxFor(a => a.Nome, 
                     new { @class = "form-control", @Value=Model.Nome })
             </div>
-            //TODO: verificar validação e no formato correto de data com jQuery datapicker
+            
             <div class="form-group">
                 @Html.LabelFor(a => a.DataNascimento)
                 @Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", 
