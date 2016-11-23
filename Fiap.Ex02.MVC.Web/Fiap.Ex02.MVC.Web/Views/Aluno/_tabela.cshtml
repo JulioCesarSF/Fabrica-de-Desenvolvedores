@@ -6,8 +6,13 @@
         <td>@item.Nome</td>
         <td>@item.DataNascimento.ToShortDateString()</td>
         <td>@(item.Bolsa ? "Sim":"Não")</td>
-        <td>@(item.Bolsa ? @item.Desconto.ToString() + "%" : "-")</td>
+        <td style="text-align:center">@(item.Bolsa ? @item.Desconto.ToString() + "%" : "-")</td>
         <td>@item.Grupo.Nome</td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id = @item.Id }, new { @class="btn btn-primary btn-sm" })
+            <button onclick="excluirId.value=@item.Id" type="button" class="btn btn-danger btn-sm"
+                    data-toggle="modal" data-target="#modalExcluir">Excluir</button>
+        </td>
     </tr>
 }
 
