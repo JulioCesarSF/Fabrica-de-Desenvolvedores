@@ -15,9 +15,11 @@
         <div class="col-md-3">
             @Html.TextBoxFor(a=>a.NomeBusca, new { placeholder="Digite um Nome", @class="form-control" })
         </div>
+        
         <div class="col-md-3">
             @Html.DropDownListFor(a=>a.IdBusca, Model.ListaGrupo, "Todos os Grupos", new { @class="form-control"})
         </div>
+        
         <div class="col-md-3">
             @HelperForm.Submit("Buscar", "btn btn-primary")
         </div>

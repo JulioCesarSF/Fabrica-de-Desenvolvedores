@@ -30,7 +30,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Listar(AlunoViewModel viewModel)
+        public ActionResult Listar()
         {
             var alunoViewModel = new AlunoViewModel()
             {
