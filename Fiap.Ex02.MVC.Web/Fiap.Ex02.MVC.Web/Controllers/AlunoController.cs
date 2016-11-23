@@ -30,6 +30,15 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Listar(AlunoViewModel viewModel)
+        {
+            var alunoViewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                ListaAluno = ListarAluno()
+            };
+            return View(alunoViewModel);
+        }
         #endregion
 
         #region POSTS
@@ -51,12 +60,18 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return RedirectToAction("Cadastrar", 
                 new { mensagem = "Cadastro realizado!", tipoMensagem = "alert alert-success" });
         }
+
         #endregion
 
         #region PRIVATE
         private SelectList ListarGrupos()
         {
             return new SelectList(_unit.GrupoRepository.Listar(), "Id", "Nome");
+        }
+
+        private ICollection<Aluno> ListarAluno()
+        {
+            return _unit.AlunoRepository.Listar();
         }
         #endregion
     }
