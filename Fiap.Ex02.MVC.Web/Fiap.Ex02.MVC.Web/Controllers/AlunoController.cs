@@ -100,16 +100,35 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Aluno aluno)
         {
-            _unit.AlunoRepository.Alterar(aluno);
-            _unit.Save();
-            var viewModel = new AlunoViewModel()
+            AlunoViewModel viewModel = null;
+            try
             {
-                Mensagem = "Aluno atualizado!",
-                TipoMensagem = "alert alert-success",
-                ListaGrupo = ListarGrupos(),
-                ListaAluno = ListarAluno()
-            };
-            return View("Listar", viewModel);
+                _unit.AlunoRepository.Alterar(aluno);
+                _unit.Save();
+                viewModel = new AlunoViewModel()
+                {
+                    Mensagem = "Aluno atualizado!",
+                    TipoMensagem = "alert alert-success",
+                    ListaGrupo = ListarGrupos(),
+                    ListaAluno = ListarAluno()
+                };
+                return View("Listar", viewModel);
+            }
+            catch (Exception e)
+            {
+                viewModel = new AlunoViewModel()
+                {
+                    Mensagem = e.GetType().ToString(),
+                    TipoMensagem = "Erro ao atualizar",
+                    Nome = aluno.Nome,
+                    DataNascimento = aluno.DataNascimento,
+                    Bolsa = aluno.Bolsa,
+                    Desconto = aluno.Desconto,
+                    GrupoId = aluno.GrupoId,
+                    ListaGrupo = ListarGrupos()
+                };
+                return View(viewModel);
+            }            
         }
         #endregion
 
