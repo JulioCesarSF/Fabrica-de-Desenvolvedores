@@ -13,7 +13,7 @@
                 @Html.LabelFor(a => a.Nome)
                 @Html.TextBoxFor(a => a.Nome, new { @class = "form-control" })
             </div>
-
+            //TODO: verificar validação e no formato correto de data com jQuery datapicker
             <div class="form-group">
                 @Html.LabelFor(a => a.DataNascimento)
                 @Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", new { @class="form-control"})
