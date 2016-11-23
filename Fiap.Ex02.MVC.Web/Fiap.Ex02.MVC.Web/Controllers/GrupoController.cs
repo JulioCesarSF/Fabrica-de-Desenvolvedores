@@ -38,10 +38,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return View(viewModel);
         }
 
-        private ICollection<Grupo> ListarGrupos()
-        {
-            return _unit.GrupoRepository.Listar();
-        }
+        
 
         [HttpGet]
         public ActionResult BuscarNome(string nome)
@@ -72,6 +69,42 @@ namespace Fiap.Ex02.MVC.Web.Controllers
                 return View(viewModel);
             }
             
+        }
+
+        public ActionResult Excluir(int id)
+        {
+            GrupoViewModel grupoViewModel = null;            
+            var projetos = _unit.ProjetoRepository.BuscarPor(g => g.Id == id);
+            var alunos = _unit.AlunoRepository.BuscarPor(g => g.GrupoId == id);
+            if (!projetos.Any() && !alunos.Any())
+            {
+                _unit.GrupoRepository.Remover(id);
+                _unit.Save();
+
+                grupoViewModel = new GrupoViewModel()
+                {
+                    Grupos = ListarGrupos(),
+                    Mensagem = "Grupo excluído com sucesso!",
+                    TipoMensagem = "alert alert-success"
+                };
+                return View("Listar", grupoViewModel);
+            }else
+            {
+                grupoViewModel = new GrupoViewModel()
+                {
+                    Mensagem = "Existem Alunos/Projetos atrelados a este Grupo. Não é possível excluir!",
+                    TipoMensagem = "alert alert-danger",
+                    Grupos = ListarGrupos()                   
+                };
+                return View("Listar", grupoViewModel);
+            }            
+        }
+        #endregion
+
+        #region PRIVATE
+        private ICollection<Grupo> ListarGrupos()
+        {
+            return _unit.GrupoRepository.Listar();
         }
         #endregion
     }

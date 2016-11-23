@@ -5,6 +5,8 @@
 
 @HelperLayout.Titulo("Lista de Grupo")
 
+@HelperLayout.Mensagem(Model.Mensagem, Model.TipoMensagem)
+
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
@@ -35,7 +37,7 @@
                 Realmente quer excluir?
             </div>
             <div class="modal-footer">
-                @using (Html.BeginForm("Excluir", "Aluno"))
+                @using (Html.BeginForm("Excluir", "Grupo"))
                 {
                     <input type="hidden" id="excluirId" name="id" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
