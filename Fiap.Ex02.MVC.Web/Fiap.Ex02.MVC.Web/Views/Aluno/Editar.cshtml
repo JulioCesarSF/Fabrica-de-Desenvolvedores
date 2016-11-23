@@ -50,7 +50,8 @@
 @section scripts{
     <script>
         $().ready(function () {
-            $("#DataNascimento").datepicker();
+            $("#DataNascimento").datepicker({ dateFormat: "dd/mm/yy" });
+            $(".selector").datepicker("option", "dateFormat", "dd/mm/yy");
 
             if ($("#Bolsa").attr("checked") == "checked") {
                 $("#Desconto").parent().css("display", "block");
