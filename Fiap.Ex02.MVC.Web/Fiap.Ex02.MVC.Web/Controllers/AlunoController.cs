@@ -83,7 +83,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return RedirectToAction("Cadastrar", 
                 new { mensagem = "Cadastro realizado!", tipoMensagem = "alert alert-success" });
         }
-
+        [HttpPost]
         public ActionResult Excluir(int id)
         {
             _unit.AlunoRepository.Remover(id);
@@ -94,6 +94,20 @@ namespace Fiap.Ex02.MVC.Web.Controllers
                 ListaAluno = ListarAluno(),
                 Mensagem = "Aluno excluído com sucesso!",
                 TipoMensagem = "alert alert-success"                
+            };
+            return View("Listar", viewModel);
+        }
+        [HttpPost]
+        public ActionResult Editar(Aluno aluno)
+        {
+            _unit.AlunoRepository.Alterar(aluno);
+            _unit.Save();
+            var viewModel = new AlunoViewModel()
+            {
+                Mensagem = "Aluno atualizado!",
+                TipoMensagem = "alert alert-success",
+                ListaGrupo = ListarGrupos(),
+                ListaAluno = ListarAluno()
             };
             return View("Listar", viewModel);
         }
