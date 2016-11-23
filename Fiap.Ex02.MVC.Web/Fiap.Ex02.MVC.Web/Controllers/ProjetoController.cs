@@ -24,8 +24,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             {
                 Mensagem = mensagem,
                 TipoMensagem = tipoMensagem,
-                DataInicio = DateTime.Now,
-                DataTermino = DateTime.Now,
+                DataInicio = DateTime.Now,                
                 Grupos = ListarGrupos()
             };
             return View(viewModel);
