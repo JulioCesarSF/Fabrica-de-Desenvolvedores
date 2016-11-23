@@ -1,0 +1,31 @@
+﻿@model Fiap.Ex02.MVC.Web.ViewModels.GrupoViewModel
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+@HelperLayout.Titulo("Cadastro de Grupo")
+
+@HelperLayout.Mensagem(Model.Mensagem, Model.TipoMensagem)
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(g=>g.Nome)
+                @Html.TextBoxFor(g=>g.Nome, new { @class = "form-control" })                
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(g=>g.Nota)
+                @Html.TextBoxFor(g=>g.Nota, new { @class="form-control"})
+            </div>
+
+            <div class="form-group">
+                @HelperForm.Submit("Salvar", "btn btn-success")
+                @HelperForm.Reset("Limpar", "btn btn-danger")
+            </div>
+        }
+    </div>
+</div>
+
