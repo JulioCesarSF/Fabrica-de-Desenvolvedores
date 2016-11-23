@@ -1,0 +1,12 @@
+﻿@model List<Fiap.Ex02.MVC.Web.Models.Projeto>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Nome</td>
+        <td>@item.Descricao</td>
+        <td>@item.DataInicio.ToShortDateString()</td>
+        <td>@(item.DataTermino.ToString() == null ? "-" :  item.DataTermino.ToString())</td>
+        <td>@(item.Entregue ? "Sim": "Não")</td>
+    </tr>
+}

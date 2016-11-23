@@ -30,6 +30,16 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public ActionResult Listar(ProjetoViewModel projetoViewModel)
+        {
+            var viewModel = new ProjetoViewModel()
+            {
+                ListaProjeto = _unit.ProjetoRepository.Listar()
+            };
+            return View(viewModel);
+        }
+
         #endregion
 
         #region POSTS

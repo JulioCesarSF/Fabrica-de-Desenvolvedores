@@ -1,0 +1,25 @@
+﻿@model Fiap.Ex02.MVC.Web.ViewModels.ProjetoViewModel
+@{
+    ViewBag.Title = "Listar";
+}
+
+@HelperLayout.Titulo("Lista de Projeto")
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data Início</th>
+                    <th>Date Término</th>
+                    <th>Entregue</th>
+                </tr>
+            </thead>
+            <tbody id="tabela">
+                @Html.Partial("_tabela", Model.ListaProjeto)
+            </tbody>
+        </table>
+    </div>
+</div>

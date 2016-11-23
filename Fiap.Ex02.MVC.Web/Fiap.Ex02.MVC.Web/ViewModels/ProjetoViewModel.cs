@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fiap.Ex02.MVC.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,9 +11,10 @@ namespace Fiap.Ex02.MVC.Web.ViewModels
     public class ProjetoViewModel
     {
         public SelectList Grupos { get; set; }
+        public ICollection<Grupo> ListaGrupo { get; set; }
+        public ICollection<Projeto> ListaProjeto { get; set; }
         public string Mensagem { get; set; }
         public string TipoMensagem { get; set; }
-
 
         #region FIELDS
 
