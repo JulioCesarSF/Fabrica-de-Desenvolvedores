@@ -1,0 +1,24 @@
+﻿@model Fiap.Ex02.MVC.Web.ViewModels.GrupoViewModel
+@{
+    ViewBag.Title = "Listar";
+}
+
+@HelperLayout.Titulo("Lista de Grupo")
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Nota</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="tabela">
+                @Html.Partial("_tabela", Model.Grupos)
+            </tbody>
+        </table>
+    </div>
+</div>

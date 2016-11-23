@@ -29,6 +29,21 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult Listar()
+        {
+            var viewModel = new GrupoViewModel()
+            {
+                Grupos = ListarGrupos()
+            };
+            return View(viewModel);
+        }
+
+        private ICollection<Grupo> ListarGrupos()
+        {
+            return _unit.GrupoRepository.Listar();
+        }
+
+        [HttpGet]
         public ActionResult BuscarNome(string nome)
         {
             var grupo = _unit.GrupoRepository.BuscarPor(g => g.Nome == nome);

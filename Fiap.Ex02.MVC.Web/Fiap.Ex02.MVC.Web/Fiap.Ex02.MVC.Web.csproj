@@ -277,6 +277,8 @@
     <Content Include="Views\Aluno\Listar.cshtml" />
     <Content Include="Views\Aluno\_tabela.cshtml" />
     <Content Include="Views\Aluno\Editar.cshtml" />
+    <Content Include="Views\Grupo\Listar.cshtml" />
+    <Content Include="Views\Grupo\_tabela.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

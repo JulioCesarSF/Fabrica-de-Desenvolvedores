@@ -1,0 +1,10 @@
+﻿@model List<Fiap.Ex02.MVC.Web.Models.Grupo>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Nome</td>
+        <td>@(item.Nota == 0 ? "Sem Nota" : item.Nota.ToString())</td>
+        <td></td>
+    </tr>
+}
