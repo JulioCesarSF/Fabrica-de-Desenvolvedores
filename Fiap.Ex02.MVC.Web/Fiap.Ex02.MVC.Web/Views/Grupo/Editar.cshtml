@@ -1,0 +1,74 @@
+﻿@model Fiap.Ex02.MVC.Web.ViewModels.GrupoViewModel
+@{
+    ViewBag.Title = "Editar";
+}
+
+@HelperLayout.Titulo("Editar Grupo")
+
+@HelperLayout.Mensagem(Model.Mensagem, Model.TipoMensagem)
+
+@Html.ValidationSummary()
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group has-feedback">
+                @Html.LabelFor(g => g.Nome)
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(g => g.Nome, new { @class = "input-validation-error form-control", @Value = Model.Nome })
+                    @Html.ValidationMessageFor(g=>g.Nota)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(g => g.Nota)
+                @Html.TextBoxFor(g => g.Nota, new { @class = "form-control", @Value = Model.Nota })
+                @Html.ValidationMessageFor(g=>g.Nota)
+            </div>
+
+            <div class="form-group">
+                @HelperForm.Submit("Salvar", "btn btn-success")
+                @HelperForm.Reset("Limpar", "btn btn-danger")
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $().ready(function () {
+
+            var nomeAtual = $("#Nome").val();
+            console.log("Nome atual: " + nomeAtual);           
+
+            $("#Nome").blur(function () {
+                if ($("#Nome").val() === nomeAtual)
+                    return;
+                $.ajax({
+                    url: '@Url.Action("BuscarNome", "Grupo")',
+                    type: "get",
+                    data: { nome: $("#Nome").val() },
+                    success: function (data) {
+                        if (data.ok) {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                            $("#Nome").focus();
+                            //console.log("achou nome");
+                        } else {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                            //console.log("nao achou nome");
+                        }
+                    },
+                    error: function () {
+                        console.log("erro");
+                    }
+                });
+            });
+        });
+    </script>
+}

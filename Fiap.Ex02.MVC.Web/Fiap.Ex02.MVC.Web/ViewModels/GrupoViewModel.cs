@@ -19,7 +19,8 @@ namespace Fiap.Ex02.MVC.Web.ViewModels
         [StringLength(150)]
         public string Nome { get; set; }
         [Display(Name = "Nota do Grupo")]
-        public float Nota { get; set; }
+        [Range(0.0, 10.0, ErrorMessage = "Valor entre 0 e 10")]
+        public Nullable<double> Nota { get; set; }
         #endregion
     }
 }

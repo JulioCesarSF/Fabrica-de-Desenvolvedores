@@ -18,7 +18,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         #region GETS
         [HttpGet]
         public ActionResult Cadastrar(string mensagem, string tipoMensagem)
-        {
+        {            
             var viewModel = new GrupoViewModel()
             {
                 Mensagem = mensagem,
@@ -29,16 +29,26 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Listar()
+        public ActionResult Listar(GrupoViewModel viewModel)
         {
-            var viewModel = new GrupoViewModel()
+            var grupoViewModel = new GrupoViewModel()
             {
                 Grupos = ListarGrupos()
             };
-            return View(viewModel);
+            return View(grupoViewModel);
         }
 
-        
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            var grupo = _unit.GrupoRepository.BuscarPorId(id);
+            var viewModel = new GrupoViewModel()
+            {
+                Nome = grupo.Nome,
+                Nota = grupo.Nota
+            };
+            return View(viewModel);
+        }
 
         [HttpGet]
         public ActionResult BuscarNome(string nome)
@@ -50,6 +60,35 @@ namespace Fiap.Ex02.MVC.Web.Controllers
         #endregion
 
         #region POSTS
+        [HttpPost]
+        public ActionResult Editar(Grupo grupo)
+        {
+            GrupoViewModel viewModel = null;
+            if (ModelState.IsValid)
+            {               
+                _unit.GrupoRepository.Alterar(grupo);
+                _unit.Save();
+
+                viewModel = new GrupoViewModel()
+                {                    
+                    Mensagem = "Grupo Atualizado!",
+                    TipoMensagem = "alert alert-success",
+                    Grupos = ListarGrupos()
+                };
+                return View("Listar", viewModel);
+            }else
+            {
+                viewModel = new GrupoViewModel()
+                {
+                    Mensagem = "Erro ao atualizar Grupo",
+                    TipoMensagem = "alert alert-danger",
+                    Nome = grupo.Nome,
+                    Nota = grupo.Nota
+                };
+                return View(viewModel);
+            }           
+        }
+
         [HttpPost]
         public ActionResult Cadastrar(GrupoViewModel viewModel)
         {
@@ -71,6 +110,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             
         }
 
+        [HttpPost]
         public ActionResult Excluir(int id)
         {
             GrupoViewModel grupoViewModel = null;            
