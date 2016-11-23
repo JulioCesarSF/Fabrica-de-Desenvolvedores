@@ -30,7 +30,7 @@ namespace Fiap.Ex02.MVC.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Listar()
+        public ActionResult Listar(AlunoViewModel viewModel)
         {
             var alunoViewModel = new AlunoViewModel()
             {
@@ -68,6 +68,19 @@ namespace Fiap.Ex02.MVC.Web.Controllers
                 new { mensagem = "Cadastro realizado!", tipoMensagem = "alert alert-success" });
         }
 
+        public ActionResult Excluir(int id)
+        {
+            _unit.AlunoRepository.Remover(id);
+            _unit.Save();
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                ListaAluno = ListarAluno(),
+                Mensagem = "Aluno excluído com sucesso!",
+                TipoMensagem = "alert alert-success"                
+            };
+            return View("Listar", viewModel);
+        }
         #endregion
 
         #region PRIVATE
