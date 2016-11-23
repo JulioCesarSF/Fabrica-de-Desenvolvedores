@@ -15,27 +15,32 @@
         {
             <div class="form-group">
                 @Html.LabelFor(a => a.Nome)
-                @Html.TextBoxFor(a => a.Nome, new { @class = "form-control" })
+                @Html.TextBoxFor(a => a.Nome, new { @class = "input-validation-error form-control" })
+                @Html.ValidationMessageFor(a=>a.Nome)
             </div>
             
             <div class="form-group">
                 @Html.LabelFor(a => a.DataNascimento)
                 @Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", new { @class="form-control"})
+                @Html.ValidationMessageFor(a=>a.DataNascimento)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.GrupoId)
                 @Html.DropDownListFor(a=>a.GrupoId, Model.ListaGrupo, "Selecione", new { @class="form-control"})
+                @Html.ValidationMessageFor(a=>a.GrupoId)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.Bolsa)
                 @Html.CheckBoxFor(a=>a.Bolsa)
+                @Html.ValidationMessageFor(a=>a.Bolsa)
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(a=>a.Desconto)
                 @Html.TextBoxFor(a=>a.Desconto, new {@class="form-control" })
+                @Html.ValidationMessageFor(a=>a.Desconto)
             </div>
 
             <div class="form-group">
@@ -62,6 +67,10 @@
                 $("#Desconto").parent().slideToggle();
                 $("#Desconto").focus();
             })
+
+            //validações
+            //$('.input-validation-error').parents('.form-group').addClass('has-error');
+
         });        
     </script>    
 }
