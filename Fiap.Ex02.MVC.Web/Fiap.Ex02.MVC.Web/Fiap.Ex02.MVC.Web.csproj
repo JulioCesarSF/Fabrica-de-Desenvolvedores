@@ -269,6 +269,7 @@
     <Content Include="Views\Grupo\Cadastrar.cshtml" />
     <Content Include="Views\Aluno\Listar.cshtml" />
     <Content Include="Views\Aluno\_tabela.cshtml" />
+    <Content Include="Views\Aluno\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
