@@ -8,6 +8,23 @@
 @HelperLayout.Mensagem(Model.Mensagem, Model.TipoMensagem)
 
 <div class="row">
+    @using (Ajax.BeginForm("Buscar", null,
+        new AjaxOptions { HttpMethod="get", UpdateTargetId="tabela", InsertionMode = InsertionMode.Replace},
+        new { id = "formularioBusca" }))
+    {
+        <div class="col-md-3">
+            @Html.TextBoxFor(a=>a.NomeBusca, new { placeholder="Digite um Nome", @class="form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownListFor(a=>a.IdBusca, Model.ListaGrupo, "Todos os Grupos", new { @class="form-control"})
+        </div>
+        <div class="col-md-3">
+            @HelperForm.Submit("Buscar", "btn btn-primary")
+        </div>
+    }
+</div>
+
+<div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
             <thead>

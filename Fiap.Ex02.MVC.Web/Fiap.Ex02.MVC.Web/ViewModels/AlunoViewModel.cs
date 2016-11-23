@@ -14,6 +14,8 @@ namespace Fiap.Ex02.MVC.Web.ViewModels
         public ICollection<Aluno> ListaAluno { get; set; }
         #endregion
 
+        public string NomeBusca { get; set; }
+        public int? IdBusca { get; set; }
         public string Mensagem { get; set; }
         public string TipoMensagem { get; set; }
 
