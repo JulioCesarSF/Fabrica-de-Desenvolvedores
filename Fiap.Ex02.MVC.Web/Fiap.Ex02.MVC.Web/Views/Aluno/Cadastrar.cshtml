@@ -42,3 +42,22 @@
     </div>
 </div>
 
+@section scripts{
+    <script>
+        $().ready(function () {
+            $("#DataNascimento").datepicker();
+
+            if ($("#Bolsa").attr("checked") == "checked") {
+                $("#Desconto").parent().css("display", "block");
+            } else {
+                $("#Desconto").parent().css("display", "none");
+            }
+
+            $("#Bolsa").click(function () {
+                $("#Desconto").parent().slideToggle();
+                $("#Desconto").focus();
+            })
+        });        
+    </script>    
+}
+
