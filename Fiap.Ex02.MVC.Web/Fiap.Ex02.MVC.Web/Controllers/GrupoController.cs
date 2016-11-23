@@ -1,4 +1,5 @@
-﻿using Fiap.Ex02.MVC.Web.UnitsOfWork;
+﻿using Fiap.Ex02.MVC.Web.Models;
+using Fiap.Ex02.MVC.Web.UnitsOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,13 @@ namespace Fiap.Ex02.MVC.Web.Controllers
 
         #region GETS
 
-        public ActionResult Cadastrar()
+        public ActionResult Cadastrar(string mensagem, string tipoMensagem)
         {
+            var grupo = new Grupo()
+            {
+
+            };
+
             return View();
         }
 

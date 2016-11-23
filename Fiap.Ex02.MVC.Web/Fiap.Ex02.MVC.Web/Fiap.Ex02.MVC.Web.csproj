@@ -243,6 +243,7 @@
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="UnitsOfWork\UnitOfWork.cs" />
     <Compile Include="ViewModels\AlunoViewModel.cs" />
+    <Compile Include="ViewModels\GrupoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
