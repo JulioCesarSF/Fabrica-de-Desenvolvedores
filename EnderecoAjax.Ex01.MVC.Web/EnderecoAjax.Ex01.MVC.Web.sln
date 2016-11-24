@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnderecoAjax.Ex01.MVC.Web", "EnderecoAjax.Ex01.MVC.Web\EnderecoAjax.Ex01.MVC.Web.csproj", "{64D69E47-6FAC-4A7B-A9A6-43298CC442C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64D69E47-6FAC-4A7B-A9A6-43298CC442C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D69E47-6FAC-4A7B-A9A6-43298CC442C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D69E47-6FAC-4A7B-A9A6-43298CC442C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D69E47-6FAC-4A7B-A9A6-43298CC442C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
