@@ -47,7 +47,7 @@
             </div>
 
             <div class="form-group">
-                @HelperForm.Submit("Salvar", "btn btn-success")
+                <input type="button" class="btn btn-success" id="btnSubmit" value="Salvar"/>
                 @HelperForm.Reset("Limpar", "btn btn-danger")                
             </div>
         }
@@ -56,8 +56,55 @@
 
 @section scripts{
     <script>
-        $().ready(function () {
-            $("#DataNascimento").datepicker({ dateFormat: "dd/mm/yy"});                        
+        $().ready(function () { 
+                           
+            $("#btnSubmit").click(function () {                
+                if (!verificarNome()) {
+                    $(this).parents("form").submit();
+                }
+            });
+
+            $("#Nome").blur(function () {
+                verificarNome();
+            });                           
+
+            //buscar se nome já existe com ajax
+            function verificarNome() {
+                if ($("#Nome").val().trim().length == 0) {
+                    $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                    $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                    $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                    $("#Nome").focus();
+                    return true;
+                }
+                    
+                $.ajax({
+                    url: '@Url.Action("BuscarNome", "Aluno")',
+                    type: "get",
+                    data: { nome: $("#Nome").val() },
+                    success: function (data) {
+                        if (data.ok) {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                            $("#Nome").focus();                            
+                            return true;                            
+                        } else {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                            return false;                            
+                        }
+                    },
+                    error: function () {
+                        console.log("erro");
+                        return false;
+                    }
+                });
+            }
+
+            //datas
+            $("#DataNascimento").datepicker({ dateFormat: "dd/mm/yy" });
             $(".selector").datepicker("option", "dateFormat", "dd/mm/yy");
 
             if ($("#Bolsa").attr("checked") == "checked") {
@@ -69,33 +116,7 @@
             $("#Bolsa").click(function () {
                 $("#Desconto").parent().slideToggle();
                 $("#Desconto").focus();
-            });           
-
-            //buscar se nome já existe com ajax
-            $("#Nome").blur(function () {                
-                $.ajax({
-                    url: '@Url.Action("BuscarNome", "Aluno")',
-                    type: "get",
-                    data: {nome: $("#Nome").val() },
-                    success: function(data){
-                        if(data.ok){
-                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
-                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
-                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
-                            $("#Nome").focus();
-                            //console.log("achou nome");
-                        }else{                            
-                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
-                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
-                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
-                            //console.log("nao achou nome");
-                        }
-                    },
-                    error: function(){
-                        console.log("erro");
-                    }
-                });
-            }); 
+            });
 
         });        
     </script>    
