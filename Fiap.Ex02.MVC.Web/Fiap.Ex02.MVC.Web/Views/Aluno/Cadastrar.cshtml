@@ -59,9 +59,28 @@
         $().ready(function () { 
                            
             $("#btnSubmit").click(function () {                
-                if (!verificarNome()) {
-                    $(this).parents("form").submit();
-                }
+                $.ajax({
+                    url: '@Url.Action("BuscarNome", "Aluno")',
+                    type: "get",
+                    data: { nome: $("#Nome").val() },
+                    success: function (data) {
+                        if (data.ok) {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                            $("#Nome").focus();
+                            return true;
+                        } else {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                            $("#btnSubmit").parents("form").submit();
+                        }
+                    },
+                    error: function () {                        
+                        return false;
+                    }
+                });               
             });
 
             $("#Nome").blur(function () {
@@ -76,31 +95,32 @@
                     $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
                     $("#Nome").focus();
                     return true;
-                }
-                    
-                $.ajax({
-                    url: '@Url.Action("BuscarNome", "Aluno")',
-                    type: "get",
-                    data: { nome: $("#Nome").val() },
-                    success: function (data) {
-                        if (data.ok) {
-                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
-                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
-                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
-                            $("#Nome").focus();                            
-                            return true;                            
-                        } else {
-                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
-                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
-                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
-                            return false;                            
+                } else {
+
+                    $.ajax({
+                        url: '@Url.Action("BuscarNome", "Aluno")',
+                        type: "get",
+                        data: { nome: $("#Nome").val() },
+                        success: function (data) {
+                            if (data.ok) {
+                                $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                                $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                                $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                                $("#Nome").focus();
+                                return true;
+                            } else {
+                                $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                                $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                                $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                                return data.ok;
+                            }
+                        },
+                        error: function () {
+                            console.log("erro");
+                            return false;
                         }
-                    },
-                    error: function () {
-                        console.log("erro");
-                        return false;
-                    }
-                });
+                    });
+                }                
             }
 
             //datas
