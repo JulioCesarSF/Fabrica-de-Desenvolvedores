@@ -138,6 +138,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fiap.Exemplo02.Dominio\Fiap.Exemplo02.Dominio.csproj">
+      <Project>{7b3f518b-c635-4b78-9e86-6d1cbc1f4bad}</Project>
+      <Name>Fiap.Exemplo02.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fiap.Exemplo02.Persistencia\Fiap.Exemplo02.Persistencia.csproj">
+      <Project>{65996e7c-22ae-47be-8c86-7f06a132b170}</Project>
+      <Name>Fiap.Exemplo02.Persistencia</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
