@@ -17,6 +17,13 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         #endregion
 
         #region GET
+
+        [HttpGet]
+        public ActionResult BuscarNome(string nome)
+        {
+            var aluno = _unit.AlunoRepository.BuscarPor(a => a.Nome == nome);
+            return Json(new { ok = aluno.Any() }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Aluno
         [HttpGet]
         public ActionResult Cadastrar(string msg, string tipoMsg)

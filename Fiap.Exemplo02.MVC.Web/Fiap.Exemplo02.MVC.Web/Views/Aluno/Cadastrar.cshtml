@@ -20,9 +20,12 @@
         @using (Html.BeginForm())
         {
 
-            <div class="form-group">
+            <div class="form-group has-feedback">
                 @Html.LabelFor(a => a.Nome)
-                @Html.TextBoxFor(a => a.Nome, new { @class = "form-control" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(a => a.Nome, new { @class = "input-validation-error form-control" })
+                </div>
                 @Html.ValidationMessageFor(a => a.Nome)
             </div>
 
@@ -92,6 +95,86 @@
                 $("#Desconto").parent().slideToggle();
                 $("#Desconto").focus();
             });
+
+            $("#btnSubmit").click(function () {                
+                $.ajax({
+                    url: '@Url.Action("BuscarNome", "Aluno")',
+                    type: "get",
+                    data: { nome: $("#Nome").val() },
+                    success: function (data) {
+                        if (data.ok) {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                            $("#Nome").focus();
+                            return true;
+                        } else {
+                            $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                            $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                            $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                            $("#btnSubmit").parents("form").submit();
+                        }
+                    },
+                    error: function () {                        
+                        return false;
+                    }
+                });               
+            });
+
+            $("#Nome").blur(function () {
+                verificarNome();
+            });                           
+
+            //buscar se nome já existe com ajax
+            function verificarNome() {
+                if ($("#Nome").val().trim().length == 0) {
+                    $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                    $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                    $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                    $("#Nome").focus();
+                    return true;
+                } else {
+
+                    $.ajax({
+                        url: '@Url.Action("BuscarNome", "Aluno")',
+                        type: "get",
+                        data: { nome: $("#Nome").val() },
+                        success: function (data) {
+                            if (data.ok) {
+                                $('.input-validation-error').parents('.form-group').removeClass('has-success').addClass('has-error');
+                                $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                                $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-remove form-control-feedback\"></i>");
+                                $("#Nome").focus();
+                                return true;
+                            } else {
+                                $('.input-validation-error').parents('.form-group').removeClass('has-error').addClass('has-success');
+                                $('.input-validation-error').parents('.input-group-addon').find('i').remove();
+                                $('.input-validation-error').parents('.input-group-addon').append("<i class=\"glyphicon glyphicon-ok form-control-feedback\"></i>");
+                                return data.ok;
+                            }
+                        },
+                        error: function () {
+                            console.log("erro");
+                            return false;
+                        }
+                    });
+                }                
+            }
+
+            //datas
+            $("#DataNascimento").datepicker({ dateFormat: "dd/mm/yy" });
+            $(".selector").datepicker("option", "dateFormat", "dd/mm/yy");
+
+            if ($("#Bolsa").attr("checked") == "checked") {
+                $("#Desconto").parent().css("display", "block");
+            } else {
+                $("#Desconto").parent().css("display", "none");
+            }
+
+            $("#Bolsa").click(function () {
+                $("#Desconto").parent().slideToggle();
+                $("#Desconto").focus();
+            });          
 
            
         });

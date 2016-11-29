@@ -3,6 +3,7 @@ using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +22,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(Grupo grupo)
         {
+            Debug.WriteLine("chamou post");
             //var con = new PortalContext();
             //con.Grupo.Add(grupo);
             //con.SaveChanges();
