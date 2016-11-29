@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Exemplo02.MVC.Web", "F
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Fiap.Exemplo02.Database", "Fiap.Exemplo02.Database\Fiap.Exemplo02.Database.sqlproj", "{43761200-377A-44AF-95EB-8C38DE420CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Exemplo02.Dominio", "Fiap.Exemplo02.Dominio\Fiap.Exemplo02.Dominio.csproj", "{7B3F518B-C635-4B78-9E86-6D1CBC1F4BAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.Exemplo02.Persistencia", "Fiap.Exemplo02.Persistencia\Fiap.Exemplo02.Persistencia.csproj", "{65996E7C-22AE-47BE-8C86-7F06A132B170}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{43761200-377A-44AF-95EB-8C38DE420CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43761200-377A-44AF-95EB-8C38DE420CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43761200-377A-44AF-95EB-8C38DE420CA4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7B3F518B-C635-4B78-9E86-6D1CBC1F4BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3F518B-C635-4B78-9E86-6D1CBC1F4BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3F518B-C635-4B78-9E86-6D1CBC1F4BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3F518B-C635-4B78-9E86-6D1CBC1F4BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65996E7C-22AE-47BE-8C86-7F06A132B170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65996E7C-22AE-47BE-8C86-7F06A132B170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65996E7C-22AE-47BE-8C86-7F06A132B170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65996E7C-22AE-47BE-8C86-7F06A132B170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
