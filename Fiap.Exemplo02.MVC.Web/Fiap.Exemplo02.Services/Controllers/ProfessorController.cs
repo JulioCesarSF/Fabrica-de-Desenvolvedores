@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace Fiap.Exemplo02.Services.Controllers
 {
     public class ProfessorController : ApiController
@@ -28,5 +29,47 @@ namespace Fiap.Exemplo02.Services.Controllers
         {
             return _unit.ProfessorRepository.BuscarPorId(id);
         }
+
+        //POST api/professor/
+        public IHttpActionResult Post(Professor professor)
+        {
+            if (ModelState.IsValid)
+            {
+                _unit.ProfessorRepository.Cadastrar(professor);
+                _unit.Save();
+                var uri = Url.Link("DefaultApi", new { id = professor.Id });
+                return Created<Professor>(new Uri(uri), professor);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        //PUT api/professor/...
+        public IHttpActionResult Put(int id, Professor professor)
+        {
+            if (ModelState.IsValid)
+            {
+                professor.Id = id;
+                _unit.ProfessorRepository.Alterar(professor);
+                _unit.Save();
+                return Ok(professor);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+            
+        }
+
+        //DELETE api/professor/{id}
+        public void Delete(int id)
+        {
+            _unit.ProfessorRepository.Remover(id);
+            _unit.Save();
+        }
+
+
     }
 }
