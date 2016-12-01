@@ -13,6 +13,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
     public class GrupoController : Controller
     {
         private UnitOfWork _unit = new UnitOfWork();
+
         [HttpGet]
         public ActionResult Cadastrar()
         {

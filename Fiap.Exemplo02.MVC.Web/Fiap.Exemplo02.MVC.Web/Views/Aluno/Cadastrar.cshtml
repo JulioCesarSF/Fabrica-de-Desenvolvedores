@@ -19,7 +19,6 @@
     <div class="col-md-12">
         @using (Html.BeginForm())
         {
-
             <div class="form-group has-feedback">
                 @Html.LabelFor(a => a.Nome)
                 <div class="input-group">
@@ -31,34 +30,19 @@
 
             <div class="form-group">
                 @Html.LabelFor(a => a.DataNascimento)
-                @*@Html.TextBoxFor(a => a.DataNascimento, new { @class = "form-control", @Value = Model.DataNascimento.ToString("dd/MM/yyyy") })*@
-                @*@Html.EditorFor(a => a.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.TextBoxFor(a => a.DataNascimento, "{0:yyyy-MM-dd}", new { @class = "form-control", type="date" })
-                @*@Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", new { @class = "form-control" })*@
-                @*0:dd/MM/yyyy*@
-               
-                @Html.ValidationMessageFor(a => a.DataNascimento)                               
-
-            </div>
-           
-            <div class="form-group">
-                @Html.LabelFor(a=>a.GrupoId)
-                @Html.DropDownListFor(a=>a.GrupoId, 
-               Model.ListaGrupo, "Selecione", 
-               new { @class="form-control" })
+                @Html.TextBoxFor(a => a.DataNascimento, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.DataNascimento)
             </div>
 
-            @*<div class="form-group">
-                @Html.LabelFor(a=>a.Professores)
-                @Html.DropDownListFor(a=>a.Professores, 
-               Model.ListaProf, 
-               "Selecione", 
-               new { @class="form-control", multiple="multiple" })
-            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(a => a.GrupoId)
+                @Html.DropDownListFor(a => a.GrupoId, Model.ListaGrupo, "Selecione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.GrupoId)
+            </div>
 
             <div class="form-group">
-                @Html.LabelFor(a=>a.Bolsa)
-                @Html.CheckBoxFor(a=>a.Bolsa)
+                @Html.LabelFor(a => a.Bolsa)
+                @Html.CheckBoxFor(a => a.Bolsa)
                 @Html.ValidationMessageFor(a => a.Bolsa)
             </div>
 
@@ -68,11 +52,9 @@
                 @Html.ValidationMessageFor(a => a.Desconto)
             </div>
 
-
-            @Juliao.Submit("Salvar")
-
-            @*@Html.EditorForModel(new { @class="form-control"})
-            @Juliao.Submit("Salvar")*@
+            <div class="form-group">
+                <input type="button" class="btn btn-success" id="btnSubmit" value="Salvar" />
+            </div>
         }
     </div>
 </div>
@@ -81,22 +63,7 @@
     <script>
         $().ready(function () {
 
-            $("#DataNascimento").datepicker();
-
-            if ($("#Bola").attr("checked") == "checked") {
-                $("#Desconto").parent().css("display", "block");
-            } else {
-                $("#Desconto").parent().css("display", "none");
-            }
-           // $("#Desconto").parent().slideToggle();
-            //Quando clicar no checkbox
-            $("#Bolsa").click(function () {
-                //Esconde ou exibe 
-                $("#Desconto").parent().slideToggle();
-                $("#Desconto").focus();
-            });
-
-            $("#btnSubmit").click(function () {                
+            $("#btnSubmit").click(function () {
                 $.ajax({
                     url: '@Url.Action("BuscarNome", "Aluno")',
                     type: "get",
@@ -115,15 +82,15 @@
                             $("#btnSubmit").parents("form").submit();
                         }
                     },
-                    error: function () {                        
+                    error: function () {
                         return false;
                     }
-                });               
+                });
             });
 
             $("#Nome").blur(function () {
                 verificarNome();
-            });                           
+            });
 
             //buscar se nome já existe com ajax
             function verificarNome() {
@@ -158,7 +125,7 @@
                             return false;
                         }
                     });
-                }                
+                }
             }
 
             //datas
@@ -174,9 +141,8 @@
             $("#Bolsa").click(function () {
                 $("#Desconto").parent().slideToggle();
                 $("#Desconto").focus();
-            });          
+            });
 
-           
         });
-    </script>       
+    </script>
 }
