@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 
 namespace Fiap.Exemplo02.Services.Controllers
 {
@@ -17,7 +17,7 @@ namespace Fiap.Exemplo02.Services.Controllers
         private UnitOfWork _unit = new UnitOfWork();
 
         #endregion
-
+        [EnableCors(origins:"*", headers:"*", methods:"*")]
         //GET api/professor
         public ICollection<Professor> Get()
         {
