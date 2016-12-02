@@ -14,7 +14,8 @@ namespace Fiap.Exemplo02.Services
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

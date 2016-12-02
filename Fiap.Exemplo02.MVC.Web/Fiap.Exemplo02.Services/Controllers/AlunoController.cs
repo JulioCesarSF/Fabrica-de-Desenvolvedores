@@ -16,7 +16,7 @@ namespace Fiap.Exemplo02.Services.Controllers
         private UnitOfWork _unit = new UnitOfWork();
 
         #endregion
-        
+
         //GET api/aluno
         public ICollection<Aluno> Get()
         {
@@ -29,6 +29,43 @@ namespace Fiap.Exemplo02.Services.Controllers
             return _unit.AlunoRepository.BuscarPorId(id);
         }
 
-        
+        public IHttpActionResult Put(int id, Aluno aluno)
+        {
+            if (ModelState.IsValid)
+            {
+                aluno.Id = id;
+                _unit.AlunoRepository.Alterar(aluno);
+                _unit.Save();
+                return Ok(aluno);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        public IHttpActionResult Post(Aluno aluno)
+        {
+            if (ModelState.IsValid)
+            {
+                _unit.AlunoRepository.Cadastrar(aluno);
+                _unit.Save();
+                var uri = Url.Link("DefaultApi", new { id = aluno.Id });
+                return Created<Aluno>(new Uri(uri), aluno);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        //GET api/
+        public void Delete(int id)
+        {
+            _unit.AlunoRepository.Remover(id);
+            _unit.Save();
+        }
+
+
     }
 }
