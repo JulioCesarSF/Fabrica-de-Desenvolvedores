@@ -16,14 +16,14 @@ namespace Fiap.Exemplo03.UI.Console
             int resp = 9;
 
             do
-            {                
+            {
                 System.Console.WriteLine("Digite a opção \n0-Cadatrar\n1-Listar\n2-Sair");
-                resp = int.Parse(System.Console.ReadLine());              
+                resp = int.Parse(System.Console.ReadLine());
 
                 switch (resp)
                 {
                     case 0:
-                        cadastrar();                                               
+                        cadastrar();
                         break;
 
                     case 1:
@@ -35,12 +35,12 @@ namespace Fiap.Exemplo03.UI.Console
 
                     default:
                         resp = 9;
-                        break;                
+                        break;
                 }
 
-            } while (resp != 2);          
+            } while (resp != 2);
 
-            
+
         }
 
         private static void Listar()
@@ -49,7 +49,7 @@ namespace Fiap.Exemplo03.UI.Console
             foreach (var item in lista)
             {
                 System.Console.WriteLine("id: {0} Nome do Professor {1}, Salário {2}", item.Id, item.Nome, item.Salario);
-            }            
+            }
         }
 
         private static void cadastrar()
@@ -67,7 +67,7 @@ namespace Fiap.Exemplo03.UI.Console
             };
 
             Uri uri = new ProfessorRepository().Cadastrar(prof);
-            if(uri != null)
+            if (uri != null)
                 System.Console.WriteLine("Url {0}", uri.ToString());
             else
                 System.Console.WriteLine("Cadastro não realizado!");
