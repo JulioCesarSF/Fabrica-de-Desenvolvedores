@@ -8,13 +8,12 @@
 <table class="table">
     <thead>
         <tr>
-            <td>Nome</td>
-            <td>Salário</td>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Salário</th>
         </tr>
     </thead>
-    <tbody>
-        
-    </tbody>
+    <tbody></tbody>
 </table>
 
 @section scripts{
@@ -23,13 +22,14 @@
     $().ready(function () {
 
         $.ajax({
-            url: "http://localhost:59253/api/professor",
+            url: "http://localhost:59253/api/professor/",
             method: "GET",
             success: function (data) {
                 $.each(data, function (index, item) {
                     var linha = $("<tr>");
-                    linha.append($("<td>").text(item.nome));
-                    linha.append($("<td>").text(item.salario));
+                    linha.append($("<td>").text(item.Id));
+                    linha.append($("<td>").text(item.Nome));
+                    linha.append($("<td>").text(item.Salario));
                     $("tbody").append(linha);
                 });
             }
