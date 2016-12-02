@@ -13,5 +13,10 @@ namespace Fiap.Exemplo04.Web.MVC.Controllers
         {
             return View();
         }
+
+        public ActionResult Cadastrar()
+        {
+            return View();
+        }
     }
 }

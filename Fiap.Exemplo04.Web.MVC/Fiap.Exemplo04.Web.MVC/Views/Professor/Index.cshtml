@@ -5,4 +5,38 @@
 
 <h2>Index</h2>
 
+<table class="table">
+    <thead>
+        <tr>
+            <td>Nome</td>
+            <td>Salário</td>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
 
+@section scripts{
+<script>
+
+    $().ready(function () {
+
+        $.ajax({
+            url: "http://localhost:59253/api/professor",
+            method: "GET",
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    var linha = $("<tr>");
+                    linha.append($("<td>").text(item.nome));
+                    linha.append($("<td>").text(item.salario));
+                    $("tbody").append(linha);
+                });
+            }
+
+        });
+
+    });
+
+</script>
+    }

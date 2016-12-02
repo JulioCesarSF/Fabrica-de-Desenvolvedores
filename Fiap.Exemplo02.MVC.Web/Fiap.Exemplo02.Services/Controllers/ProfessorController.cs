@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Fiap.Exemplo02.Services.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProfessorController : ApiController
     {
         #region FIELDS
@@ -17,7 +18,7 @@ namespace Fiap.Exemplo02.Services.Controllers
         private UnitOfWork _unit = new UnitOfWork();
 
         #endregion
-        [EnableCors(origins:"*", headers:"*", methods:"*")]
+        
         //GET api/professor
         public ICollection<Professor> Get()
         {
