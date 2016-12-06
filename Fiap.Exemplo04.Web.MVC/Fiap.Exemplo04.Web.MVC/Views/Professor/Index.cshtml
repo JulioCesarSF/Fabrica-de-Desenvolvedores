@@ -1,9 +1,37 @@
-﻿
+﻿@model Fiap.Exemplo04.Web.MVC.ViewModels.ProfessorViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div id="mensagem" class="alert alert-success">
+    <p>Cadastrado</p>
+</div>
+
+@*appHarbor*@
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(p => p.Nome)
+                @Html.TextBoxFor(p => p.Nome, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(p => p.Salario)
+                @Html.TextBoxFor(p => p.Salario, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <button id="btnSalvar" class="btn btn-success">Salvar</button>
+            </div>
+        }
+
+    </div>
+
+</div>
+
 
 <table class="table">
     <thead>
@@ -11,32 +39,88 @@
             <th>Id</th>
             <th>Nome</th>
             <th>Salário</th>
+            <th>Ação</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table>
 
 @section scripts{
-<script>
+    <script>
 
-    $().ready(function () {
+        $().ready(function () {
+            $("#mensagem").toggle();
 
-        $.ajax({
-            url: "http://localhost:59253/api/professor/",
-            method: "GET",
-            success: function (data) {
-                $.each(data, function (index, item) {
-                    var linha = $("<tr>");
-                    linha.append($("<td>").text(item.Id));
-                    linha.append($("<td>").text(item.Nome));
-                    linha.append($("<td>").text(item.Salario));
-                    $("tbody").append(linha);
+            listar();
+
+            function listar() {
+                $.ajax({
+                    url: "http://localhost:59253/api/professor/",
+                    method: "GET",
+                    success: function (data) {
+                        $("tbody").empty();
+                        $.each(data, function (index, item) {                            
+                            var linha = $("<tr>");
+                            linha.append($("<td>").text(item.Id));
+                            linha.append($("<td>").text(item.Nome));
+                            linha.append($("<td>").text(item.Salario));
+
+                            var botao = $("<button class=\"btn btn-danger\">").text("Excluir").click(function () {
+                                deletarProf(item.Id);
+                            });
+
+                            linha.append(botao);
+
+                            $("tbody").append(linha);
+                        });
+                    }
+
                 });
             }
 
+            //deletar
+
+            function deletarProf(id) {
+                $.ajax({
+                    url: "http://localhost:59253/api/professor/" + id,
+                    method: "delete",
+                    success: function (data, statusString, xhr) {
+                        listar();
+                    },
+                    erro: function (data, statusString, xhr) {
+                        return false;
+                    }
+                });
+            }
+
+            //btnsalvar
+
+            $("#btnSalvar").click(function () {
+                //enviar ajax
+
+                $.ajax({
+                    url: "http://localhost:59253/api/professor/",
+                    method: "post",
+                    dataType: "json",
+                    data: {
+                        Nome: $("#Nome").val(),
+                        Salario: $("#Salario").val()
+                    },
+                    success: function (data, statusString, xhr) {
+                        listar();
+                        console.log("cadastrado!" + data.Mensagem);
+                        
+                    },
+                    erro: function (data, statusString, xhr) {
+                        console.log("erro" + statusString);
+                    }
+
+                });
+
+                // $(this).parents("form").submit();
+            });
+
         });
 
-    });
-
-</script>
-    }
+    </script>
+}

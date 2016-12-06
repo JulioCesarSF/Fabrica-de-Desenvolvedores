@@ -1,0 +1,46 @@
+﻿@model Fiap.Exemplo04.Web.MVC.ViewModels.ProfessorViewModel
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<h2>Cadastrar</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(p => p.Nome)
+                @Html.TextBoxFor(p => p.Nome, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(p => p.Salario)
+                @Html.TextBoxFor(p => p.Salario, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <button id="btnSalvar" class="btn btn-success" value="Salvar"></button>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        $().ready(function () {
+            $("#btnSalvar").click(function () {
+                //enviar ajax
+
+                $.ajax(function() {
+                    
+                });
+
+                $(this).parents("form").submit();
+            });
+        });
+    </script>
+}
