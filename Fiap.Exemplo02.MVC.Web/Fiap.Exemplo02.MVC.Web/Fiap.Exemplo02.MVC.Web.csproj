@@ -239,6 +239,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlunoController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfessorController.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Views\Professor\Cadastrar.cshtml" />
     <Content Include="Views\Professor\Listar.cshtml" />
     <Content Include="Views\Aluno\_tabela.cshtml" />
+    <Content Include="Views\Error\Erro404.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

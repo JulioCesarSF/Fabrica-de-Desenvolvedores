@@ -39,8 +39,16 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                     
                 };
                 _unit.ProfessorRepository.Cadastrar(prof);
-                _unit.Save();               
-
+                try
+                {
+                    _unit.Save();
+                }
+                catch (Exception e)
+                {
+                    profViewModel.TipoMensagem = "alert alert-danger";
+                    profViewModel.Mensagem = "Erro ao cadastrar: " + e.Message;
+                    return View(profViewModel);
+                }
                 return RedirectToAction("Cadastrar", new { msg = "Professor cadastrado!", tipoMsg = "alert alert-success" });
             }else
             {
