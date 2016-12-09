@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Fiap.Exemplo02.MVC.Web.Controllers
 {
+    [Authorize]
     public class ProfessorController : Controller
     {
         private UnitOfWork _unit = new UnitOfWork();
