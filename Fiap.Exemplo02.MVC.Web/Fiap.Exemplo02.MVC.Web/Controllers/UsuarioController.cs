@@ -58,7 +58,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             }
             var user = new Usuario
             {
-                UserName = model.Email
+                UserName = model.Email                
             };
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
