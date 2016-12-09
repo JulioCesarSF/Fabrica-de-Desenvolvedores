@@ -36,6 +36,8 @@ namespace Fiap.Exemplo02.Persistencia.Test
             _repository.Cadastrar(prof);
             int r = _context.SaveChanges();
             Assert.AreEqual(1, r);
+
+            //Assert.AreNotEqual(aluno.Id, 0); verificar se um Id foi gerado no banco
         }
     }
 }
